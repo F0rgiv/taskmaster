@@ -11,7 +11,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginBottom="32dp"
-    android:text="Add Task"
+    android:text="@string/add_task"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toStartOf="@+id/allTasks"
     app:layout_constraintStart_toStartOf="parent" />
@@ -21,7 +21,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginBottom="32dp"
-    android:text="All Tasks"
+    android:text="@string/all_tasks"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toEndOf="@+id/addTaskButton" />
@@ -32,7 +32,7 @@
     android:layout_height="wrap_content"
     android:layout_marginStart="24dp"
     android:layout_marginTop="24dp"
-    android:text="TextView"
+    android:text="@string/my_tasks"
     android:textAppearance="@style/TextAppearance.AppCompat.Display2"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent" />
@@ -41,6 +41,7 @@
     android:id="@+id/imageView"
     android:layout_width="323dp"
     android:layout_height="363dp"
+    android:contentDescription="@string/hero_image"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
