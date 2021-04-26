@@ -1,8 +1,10 @@
-package com.f0rgiv.taskmaster;
+package com.f0rgiv.taskmaster.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.f0rgiv.taskmaster.R;
 
 public class AddTask extends AppCompatActivity {
 

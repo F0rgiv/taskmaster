@@ -6,7 +6,7 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   android:accessibilityLiveRegion="none"
-  tools:context=".AddTask">
+  tools:context=".activities.AddTask">
 
   <TextView
     android:id="@+id/textView2"
@@ -15,8 +15,8 @@
     android:layout_marginStart="32dp"
     android:layout_marginTop="32dp"
     android:accessibilityLiveRegion="assertive"
-    android:text="Add Task"
-    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+    android:text="@string/add_task"
+    android:textAppearance="@style/TextAppearance.AppCompat.Display2"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent" />
 
@@ -24,10 +24,9 @@
     android:id="@+id/createNewTask"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="Button"
+    android:layout_marginStart="32dp"
+    android:text="@string/add_task"
     app:layout_constraintBottom_toTopOf="@+id/totalTasks"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="0.5"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/editTextTeskDescription" />
 
@@ -35,10 +34,9 @@
     android:id="@+id/totalTasks"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="TextView"
+    android:layout_marginStart="32dp"
+    android:text="@string/total_tasks_0"
     app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="0.5"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/createNewTask" />
 
@@ -47,25 +45,43 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:ems="10"
-    android:hint="My task"
+    android:hint="@string/my_task"
     android:inputType="textPersonName"
     app:layout_constraintBottom_toTopOf="@+id/editTextTeskDescription"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintHorizontal_bias="0.5"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/textView2" />
+    app:layout_constraintTop_toBottomOf="@+id/textView2"
+    android:autofillHints="" />
 
   <EditText
     android:id="@+id/editTextTeskDescription"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:ems="10"
+    android:hint="@string/do_something"
     android:inputType="textPersonName"
-    android:text="Name"
     app:layout_constraintBottom_toTopOf="@+id/createNewTask"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintHorizontal_bias="0.5"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/editTextTaskTitle" />
+    app:layout_constraintTop_toBottomOf="@+id/editTextTaskTitle"
+    android:autofillHints="" />
+
+  <TextView
+    android:id="@+id/textView4"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/title"
+    app:layout_constraintBottom_toTopOf="@+id/editTextTaskTitle"
+    app:layout_constraintStart_toStartOf="@+id/editTextTaskTitle" />
+
+  <TextView
+    android:id="@+id/textView5"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/description"
+    app:layout_constraintBottom_toTopOf="@+id/editTextTeskDescription"
+    app:layout_constraintStart_toStartOf="@+id/editTextTeskDescription" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

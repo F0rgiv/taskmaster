@@ -1,10 +1,12 @@
-package com.f0rgiv.taskmaster;
+package com.f0rgiv.taskmaster.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+
+import com.f0rgiv.taskmaster.R;
 
 public class MainActivity extends AppCompatActivity {
 
