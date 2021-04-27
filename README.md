@@ -9,4 +9,8 @@ v 0.1
 * Adds create new task page with a submit button that increments task count.
 * Adds all Tasks page that is a place holder for future content.
 
+v 0.2
+* Adds settings screen and menu dropdown.
+* Adds task detail page with 4 static tasks on the homepage.
+
 ![image description](screenshots/homepage.PNG)
