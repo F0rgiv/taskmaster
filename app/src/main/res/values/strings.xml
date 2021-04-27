@@ -7,7 +7,7 @@
     -->
   <string name="hello_world">Hello Square World!</string>
   <string name="add_task">Add Task</string>
-  <string name="total_tasks_0">Total tasks: 0</string>
+  <string name="total_tasks">Total tasks:</string>
   <string name="my_task">My task</string>
   <string name="do_something">Do something</string>
   <string name="title">Title</string>
@@ -24,4 +24,5 @@
   <string name="all_tasks">All Tasks</string>
   <string name="my_tasks">My Tasks</string>
   <string name="hero_image">hero image</string>
+  <string name="submittedMsg">Submitted!</string>
 </resources>

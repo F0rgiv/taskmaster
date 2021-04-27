@@ -26,16 +26,16 @@
     android:layout_height="wrap_content"
     android:layout_marginStart="32dp"
     android:text="@string/add_task"
-    app:layout_constraintBottom_toTopOf="@+id/totalTasks"
+    app:layout_constraintBottom_toTopOf="@+id/totalTasksText"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/editTextTeskDescription" />
 
   <TextView
-    android:id="@+id/totalTasks"
+    android:id="@+id/totalTasksText"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginStart="32dp"
-    android:text="@string/total_tasks_0"
+    android:text="@string/total_tasks"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/createNewTask" />
@@ -83,5 +83,14 @@
     android:text="@string/description"
     app:layout_constraintBottom_toTopOf="@+id/editTextTeskDescription"
     app:layout_constraintStart_toStartOf="@+id/editTextTeskDescription" />
+
+  <TextView
+    android:id="@+id/submitMsgText"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:layout_constraintBottom_toBottomOf="@+id/totalTasksText"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toEndOf="@+id/totalTasksText"
+    app:layout_constraintTop_toTopOf="@+id/totalTasksText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
