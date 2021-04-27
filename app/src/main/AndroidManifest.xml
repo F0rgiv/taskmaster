@@ -13,24 +13,15 @@
     android:roundIcon="@mipmap/ic_launcher_round"
     android:supportsRtl="true"
     android:theme="@style/Theme.Taskmaster">
-    <activity android:name=".activities.AllTasks"></activity>
-    <activity android:name=".activities.AddTask" /> <!-- <uses-library -->
-    <!-- android:name="com.google.android.wearable" -->
-    <!-- android:required="true" /> -->
-    <!-- &lt;!&ndash; -->
-    <!-- Set to true if your app is Standalone, that is, it does not require the handheld -->
-    <!-- app to run. -->
-    <!-- &ndash;&gt; -->
-    <!-- <meta-data -->
-    <!-- android:value="true" /> -->
-    <!-- <activity -->
-    <!-- android:name=".addTask" -->
-    <!-- android:label="@string/title_activity_add_task"> -->
-    <!-- <intent-filter> -->
-    <!-- <action android:name="android.intent.action.MAIN" /> -->
-    <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-    <!-- </intent-filter> -->
-    <!-- </activity> -->
+    <activity android:name=".activities.TaskDetailActivity"></activity>
+    <activity
+      android:name=".activities.SettingsActivity"
+      android:label="@string/title_activity_settings" />
+    <activity android:name=".activities.Settings" />
+    <activity android:name=".activities.AllTasks" />
+    <activity
+      android:name=".activities.AddTask"
+      android:launchMode="singleInstance" />
     <activity android:name=".activities.MainActivity">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
