@@ -27,7 +27,7 @@
     app:layout_constraintStart_toEndOf="@+id/addTaskButton" />
 
   <TextView
-    android:id="@+id/textView"
+    android:id="@+id/mainTasksGreetingLabel"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginStart="24dp"
@@ -58,7 +58,7 @@
     app:layout_constraintEnd_toStartOf="@+id/task2button"
     app:layout_constraintHorizontal_bias="0.5"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/textView" />
+    app:layout_constraintTop_toBottomOf="@+id/mainTasksGreetingLabel" />
 
   <Button
     android:id="@+id/task3button"
@@ -92,17 +92,6 @@
     app:layout_constraintHorizontal_bias="0.5"
     app:layout_constraintStart_toEndOf="@+id/task1button"
     app:layout_constraintTop_toTopOf="@+id/task1button" />
-
-  <TextView
-    android:id="@+id/mainTasksGreetingLabel"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="@string/tasks"
-    app:layout_constraintBottom_toTopOf="@+id/task1button"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="0.5"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/textView" />
 
   <ImageButton
     android:id="@+id/mainGoToSettingsButton"
