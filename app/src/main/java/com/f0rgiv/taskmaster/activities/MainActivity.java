@@ -1,28 +1,45 @@
 package com.f0rgiv.taskmaster.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
-import com.f0rgiv.taskmaster.R;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import java.lang.reflect.Array;
+import com.f0rgiv.taskmaster.R;
+import com.f0rgiv.taskmaster.adapters.TaskRecyclerAdapter;
+import com.f0rgiv.taskmaster.models.Task;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
-  String TAG = "main";
+  String TAG = "mainActivity";
+
+  public static List<Task> tasks = new ArrayList<>();
+
+  static {
+    tasks.add(new Task("task1","sample data", "new"));
+    tasks.add(new Task("task2","sample data", "new"));
+    tasks.add(new Task("task3","sample data", "new"));
+    tasks.add(new Task("task4","sample data", "new"));
+    tasks.add(new Task("task5","sample data", "new"));
+    tasks.add(new Task("task6","sample data", "new"));
+    tasks.add(new Task("task7","sample data", "new"));
+    tasks.add(new Task("task8","sample data", "new"));
+    tasks.add(new Task("task9","sample data", "new"));
+    tasks.add(new Task("task10","sample data", "new"));
+  }
 
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
@@ -46,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-    //onClickListeners
 
     findViewById(R.id.addTaskButton).setOnClickListener(view ->
       MainActivity.this.startActivity(new Intent(MainActivity.this, AddTask.class)));
@@ -54,14 +70,20 @@ public class MainActivity extends AppCompatActivity {
     findViewById(R.id.allTasks).setOnClickListener(view ->
       MainActivity.this.startActivity(new Intent(MainActivity.this, AllTasks.class)));
 
-    findViewById(R.id.task1button).setOnClickListener(HandleTaskButtonClick());
-    findViewById(R.id.task2button).setOnClickListener(HandleTaskButtonClick());
-    findViewById(R.id.task3button).setOnClickListener(HandleTaskButtonClick());
-    findViewById(R.id.task4button).setOnClickListener(HandleTaskButtonClick());
+    RecyclerView recyclerView = findViewById(R.id.mainRecyclerView);
+    RecyclerView.LayoutManager lm = new LinearLayoutManager(this);
+    recyclerView.setLayoutManager(lm);
+//    recyclerView.setAdapter(new TaskRecyclerAdapter(handleOnClickTask));
+    recyclerView.setAdapter(new TaskRecyclerAdapter(vh -> {
+      Intent intent = new Intent(MainActivity.this, TaskDetailActivity.class);
+      intent.putExtra("taskName", vh.taskName);
+      MainActivity.this.startActivity(intent);
+    }));
   }
 
   @Override
   protected void onResume() {
+    Log.i(TAG, "Resumed: We are here");
     super.onResume();
     SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
     String greeting = "Tasks";
@@ -70,12 +92,10 @@ public class MainActivity extends AppCompatActivity {
     ((TextView) findViewById(R.id.mainTasksGreetingLabel)).setText(greeting);
   }
 
-  //onClick callbacks
-  private View.OnClickListener HandleTaskButtonClick() {
-    return view ->{
-      Intent intent = new Intent(MainActivity.this, TaskDetailActivity.class);
-      intent.putExtra("taskName", ((Button)view).getText().toString());
-      MainActivity.this.startActivity(intent);
-      };
-  }
+//  TaskRecyclerAdapter.HandleOnClickTask handleOnClickTask = new TaskRecyclerAdapter.HandleOnClickTask() {
+//    @Override
+//    void handleClickOnTask(TaskRecyclerAdapter.TaskViewHolder taskViewHolder) {
+//
+//    }
+//  }
 }
