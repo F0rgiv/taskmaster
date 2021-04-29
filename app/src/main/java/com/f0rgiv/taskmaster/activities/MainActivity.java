@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,22 +23,22 @@ import java.util.List;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
-  String TAG = "mainActivity";
-
   public static List<Task> tasks = new ArrayList<>();
 
   static {
-    tasks.add(new Task("task1","sample data", "new"));
-    tasks.add(new Task("task2","sample data", "new"));
-    tasks.add(new Task("task3","sample data", "new"));
-    tasks.add(new Task("task4","sample data", "new"));
-    tasks.add(new Task("task5","sample data", "new"));
-    tasks.add(new Task("task6","sample data", "new"));
-    tasks.add(new Task("task7","sample data", "new"));
-    tasks.add(new Task("task8","sample data", "new"));
-    tasks.add(new Task("task9","sample data", "new"));
-    tasks.add(new Task("task10","sample data", "new"));
+    tasks.add(new Task("task1", "sample data", Task.State.NEW));
+    tasks.add(new Task("task2", "sample data", Task.State.NEW));
+    tasks.add(new Task("task3", "sample data", Task.State.NEW));
+    tasks.add(new Task("task4", "sample data", Task.State.NEW));
+    tasks.add(new Task("task5", "sample data", Task.State.NEW));
+    tasks.add(new Task("task6", "sample data", Task.State.NEW));
+    tasks.add(new Task("task7", "sample data", Task.State.NEW));
+    tasks.add(new Task("task8", "sample data", Task.State.NEW));
+    tasks.add(new Task("task9", "sample data", Task.State.NEW));
+    tasks.add(new Task("task10", "sample data", Task.State.NEW));
   }
+
+  String TAG = "mainActivity";
 
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
