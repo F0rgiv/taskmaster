@@ -13,32 +13,22 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
 import com.f0rgiv.taskmaster.R;
 import com.f0rgiv.taskmaster.adapters.TaskRecyclerAdapter;
 import com.f0rgiv.taskmaster.models.Task;
+import com.f0rgiv.taskmaster.service.DatabaseManager;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
-  public static List<Task> tasks = new ArrayList<>();
-
-  static {
-    tasks.add(new Task("task1", "sample data", Task.State.NEW));
-    tasks.add(new Task("task2", "sample data", Task.State.NEW));
-    tasks.add(new Task("task3", "sample data", Task.State.NEW));
-    tasks.add(new Task("task4", "sample data", Task.State.NEW));
-    tasks.add(new Task("task5", "sample data", Task.State.NEW));
-    tasks.add(new Task("task6", "sample data", Task.State.NEW));
-    tasks.add(new Task("task7", "sample data", Task.State.NEW));
-    tasks.add(new Task("task8", "sample data", Task.State.NEW));
-    tasks.add(new Task("task9", "sample data", Task.State.NEW));
-    tasks.add(new Task("task10", "sample data", Task.State.NEW));
-  }
-
   String TAG = "mainActivity";
+
+  public static List<Task> tasks = new ArrayList<>();
+  DatabaseManager databaseManager;
 
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
@@ -63,6 +53,10 @@ public class MainActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
+    databaseManager = Room.databaseBuilder(getApplicationContext(), DatabaseManager.class, "f0rgiv_taskmaster")
+      .allowMainThreadQueries()
+      .build();
+
     findViewById(R.id.addTaskButton).setOnClickListener(view ->
       MainActivity.this.startActivity(new Intent(MainActivity.this, AddTask.class)));
 
@@ -72,12 +66,12 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerView = findViewById(R.id.mainRecyclerView);
     RecyclerView.LayoutManager lm = new LinearLayoutManager(this);
     recyclerView.setLayoutManager(lm);
-//    recyclerView.setAdapter(new TaskRecyclerAdapter(handleOnClickTask));
+//  recyclerView.setAdapter(new TaskRecyclerAdapter(handleOnClickTask));
     recyclerView.setAdapter(new TaskRecyclerAdapter(vh -> {
       Intent intent = new Intent(MainActivity.this, TaskDetailActivity.class);
       intent.putExtra("taskName", vh.taskName);
-      MainActivity.this.startActivity(intent);
-    }));
+    MainActivity.this.startActivity(intent);
+  }));
   }
 
   @Override

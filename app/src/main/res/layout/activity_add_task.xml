@@ -28,7 +28,7 @@
     android:text="@string/add_task"
     app:layout_constraintBottom_toTopOf="@+id/totalTasksText"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/editTextTeskDescription" />
+    app:layout_constraintTop_toBottomOf="@+id/editTextNewTeskDescription" />
 
   <TextView
     android:id="@+id/totalTasksText"
@@ -41,13 +41,13 @@
     app:layout_constraintTop_toBottomOf="@+id/createNewTask" />
 
   <EditText
-    android:id="@+id/editTextTaskTitle"
+    android:id="@+id/editTextNewTaskTitle"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:ems="10"
     android:hint="@string/my_task"
     android:inputType="textPersonName"
-    app:layout_constraintBottom_toTopOf="@+id/editTextTeskDescription"
+    app:layout_constraintBottom_toTopOf="@+id/editTextNewTeskDescription"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintHorizontal_bias="0.5"
     app:layout_constraintStart_toStartOf="parent"
@@ -55,7 +55,7 @@
     android:autofillHints="" />
 
   <EditText
-    android:id="@+id/editTextTeskDescription"
+    android:id="@+id/editTextNewTeskDescription"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:ems="10"
@@ -65,7 +65,7 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintHorizontal_bias="0.5"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/editTextTaskTitle"
+    app:layout_constraintTop_toBottomOf="@+id/editTextNewTaskTitle"
     android:autofillHints="" />
 
   <TextView
@@ -73,16 +73,16 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="@string/title"
-    app:layout_constraintBottom_toTopOf="@+id/editTextTaskTitle"
-    app:layout_constraintStart_toStartOf="@+id/editTextTaskTitle" />
+    app:layout_constraintBottom_toTopOf="@+id/editTextNewTaskTitle"
+    app:layout_constraintStart_toStartOf="@+id/editTextNewTaskTitle" />
 
   <TextView
     android:id="@+id/textView5"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="@string/description"
-    app:layout_constraintBottom_toTopOf="@+id/editTextTeskDescription"
-    app:layout_constraintStart_toStartOf="@+id/editTextTeskDescription" />
+    app:layout_constraintBottom_toTopOf="@+id/editTextNewTeskDescription"
+    app:layout_constraintStart_toStartOf="@+id/editTextNewTeskDescription" />
 
   <TextView
     android:id="@+id/submitMsgText"
