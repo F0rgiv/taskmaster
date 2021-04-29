@@ -13,4 +13,8 @@ v 0.2
 * Adds settings screen and menu dropdown.
 * Adds task detail page with 4 static tasks on the homepage.
 
+v 0.3
+* Adds tasks to the front page within a RecyclerView
+* Lays out groundwork to store tasks within an abstract class and easily update them
+
 ![image description](screenshots/homepage.PNG)
