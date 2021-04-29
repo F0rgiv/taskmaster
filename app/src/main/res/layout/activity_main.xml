@@ -44,53 +44,17 @@
     android:contentDescription="@string/hero_image"
     app:layout_constraintBottom_toTopOf="@+id/addTaskButton"
     app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="0.621"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/task3button"
+    app:layout_constraintTop_toBottomOf="@+id/mainRecyclerView"
     app:srcCompat="@android:drawable/ic_menu_today" />
 
-  <Button
-    android:id="@+id/task1button"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="@string/task_1"
-    app:layout_constraintBottom_toTopOf="@+id/task3button"
-    app:layout_constraintEnd_toStartOf="@+id/task2button"
-    app:layout_constraintHorizontal_bias="0.5"
+  <androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/mainRecyclerView"
+    android:layout_width="326dp"
+    android:layout_height="276dp"
+    app:layout_constraintBottom_toTopOf="@+id/imageView"
+    app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/mainTasksGreetingLabel" />
-
-  <Button
-    android:id="@+id/task3button"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="@string/task_3"
-    app:layout_constraintBottom_toTopOf="@+id/imageView"
-    app:layout_constraintEnd_toStartOf="@+id/task4button"
-    app:layout_constraintHorizontal_bias="0.5"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/task1button" />
-
-  <Button
-    android:id="@+id/task4button"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="@string/task_4"
-    app:layout_constraintBottom_toBottomOf="@+id/task3button"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="0.5"
-    app:layout_constraintStart_toEndOf="@+id/task3button"
-    app:layout_constraintTop_toTopOf="@+id/task3button" />
-
-  <Button
-    android:id="@+id/task2button"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="@string/task_2"
-    app:layout_constraintBottom_toBottomOf="@+id/task1button"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="0.5"
-    app:layout_constraintStart_toEndOf="@+id/task1button"
-    app:layout_constraintTop_toTopOf="@+id/task1button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
