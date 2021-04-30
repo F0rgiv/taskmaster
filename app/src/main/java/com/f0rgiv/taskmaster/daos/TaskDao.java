@@ -18,7 +18,7 @@ public interface TaskDao {
   List<Task> findAll();
 
   @Query("SELECT * FROM Task WHERE id = :id")
-  List<Task> findById(Long id);
+  Task findById(Long id);
 
   @Query("SELECT COUNT(*) FROM Task")
   int getCount();

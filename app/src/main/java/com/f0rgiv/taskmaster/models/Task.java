@@ -17,14 +17,4 @@ public class Task {
     this.description = description;
     this.state = state;
   }
-
-  //  State state;
-//
-//  public Task(String title, String description, State state) {
-//    this.title = title;
-//    this.description = description;
-//    this.state = state;
-//  }
-//
-//  public enum State {NEW, ASSIGNED, INPROGRESS, COMPLETE}
 }

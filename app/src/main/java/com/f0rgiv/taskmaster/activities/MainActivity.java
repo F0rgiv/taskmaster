@@ -25,9 +25,8 @@ import java.util.List;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
-  String TAG = "mainActivity";
-
   public static List<Task> tasks = new ArrayList<>();
+  String TAG = "mainActivity";
   DatabaseManager databaseManager;
 
   @Override
@@ -53,25 +52,13 @@ public class MainActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
-    databaseManager = Room.databaseBuilder(getApplicationContext(), DatabaseManager.class, "f0rgiv_taskmaster")
-      .allowMainThreadQueries()
-      .build();
-
     findViewById(R.id.addTaskButton).setOnClickListener(view ->
       MainActivity.this.startActivity(new Intent(MainActivity.this, AddTask.class)));
 
     findViewById(R.id.allTasks).setOnClickListener(view ->
       MainActivity.this.startActivity(new Intent(MainActivity.this, AllTasks.class)));
 
-    RecyclerView recyclerView = findViewById(R.id.mainRecyclerView);
-    RecyclerView.LayoutManager lm = new LinearLayoutManager(this);
-    recyclerView.setLayoutManager(lm);
-//  recyclerView.setAdapter(new TaskRecyclerAdapter(handleOnClickTask));
-    recyclerView.setAdapter(new TaskRecyclerAdapter(vh -> {
-      Intent intent = new Intent(MainActivity.this, TaskDetailActivity.class);
-      intent.putExtra("taskName", vh.taskName);
-    MainActivity.this.startActivity(intent);
-  }));
+
   }
 
   @Override
@@ -83,6 +70,20 @@ public class MainActivity extends AppCompatActivity {
     String username = preferences.getString("username", null);
     if (username != null) greeting = String.format(Locale.ENGLISH, "%s's tasks", username);
     ((TextView) findViewById(R.id.mainTasksGreetingLabel)).setText(greeting);
+
+    databaseManager = Room.databaseBuilder(getApplicationContext(), DatabaseManager.class, "f0rgiv_taskmaster")
+      .allowMainThreadQueries()
+      .build();
+
+    RecyclerView recyclerView = findViewById(R.id.mainRecyclerView);
+    RecyclerView.LayoutManager lm = new LinearLayoutManager(this);
+    recyclerView.setLayoutManager(lm);
+    recyclerView.setAdapter(new TaskRecyclerAdapter(vh -> {
+      Intent intent = new Intent(MainActivity.this, TaskDetailActivity.class);
+      intent.putExtra("taskId", vh.task.id);
+      MainActivity.this.startActivity(intent);
+    },
+      databaseManager.taskDao().findAll()));
   }
 
 //  TaskRecyclerAdapter.HandleOnClickTask handleOnClickTask = new TaskRecyclerAdapter.HandleOnClickTask() {
