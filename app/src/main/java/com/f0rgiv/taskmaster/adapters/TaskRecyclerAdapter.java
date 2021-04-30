@@ -15,31 +15,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaskRecyclerAdapter extends RecyclerView.Adapter<TaskRecyclerAdapter.TaskViewHolder> {
-  static List<String> tasks = new ArrayList<>();
-
-  static {
-    tasks.add("task1");
-    tasks.add("task2");
-    tasks.add("task3");
-    tasks.add("task4");
-    tasks.add("task5");
-    tasks.add("task6");
-    tasks.add("task7");
-    tasks.add("task8");
-    tasks.add("task9");
-    tasks.add("task10");
-    tasks.add("task11");
-    tasks.add("task12");
-    tasks.add("task13");
-    tasks.add("task14");
-    tasks.add("task15");
-  }
+  List<Task> tasks;
 
   public HandleOnClickAble handleOnClickAble;
   String TAG = "mainActivity";
 
-  public TaskRecyclerAdapter(HandleOnClickAble handleOnClickAble) {
+  public TaskRecyclerAdapter(HandleOnClickAble handleOnClickAble, List<Task> tasks) {
     this.handleOnClickAble = handleOnClickAble;
+    this.tasks = tasks;
   }
 
   @NonNull
@@ -52,9 +35,8 @@ public class TaskRecyclerAdapter extends RecyclerView.Adapter<TaskRecyclerAdapte
 
   @Override
   public void onBindViewHolder(@NonNull TaskViewHolder holder, int position) {
-    String taskName = tasks.get(position);
-    holder.taskName = taskName;
-    ((Button) holder.itemView.findViewById(R.id.taskFragmentTaskButton)).setText(taskName);
+    holder.task = tasks.get(position);
+    ((Button) holder.itemView.findViewById(R.id.taskFragmentTaskButton)).setText(holder.task.title);
     holder.itemView.findViewById(R.id.taskFragmentTaskButton).setOnClickListener(view -> handleOnClickAble.handleClickOnTask(holder));
   }
 
@@ -74,7 +56,7 @@ public class TaskRecyclerAdapter extends RecyclerView.Adapter<TaskRecyclerAdapte
 
 
   public static class TaskViewHolder extends RecyclerView.ViewHolder {
-    public String taskName;
+    public Task task;
 
     public TaskViewHolder(@NonNull View itemView) {
       super(itemView);

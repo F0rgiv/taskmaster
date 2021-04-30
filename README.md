@@ -17,4 +17,13 @@ v 0.3
 * Adds tasks to the front page within a RecyclerView
 * Lays out groundwork to store tasks within an abstract class and easily update them
 
+v 0.4
+* Adds the ability to dynamically create and save tasks into the Db.
+* Task details now loads the entire task rather than just the task title being passed in.
+* adds ability to save tasks into the DB and basic dao commands:
+  * getAll
+  * getCount
+  * getById
+  * insert
+
 ![image description](screenshots/homepage.PNG)
