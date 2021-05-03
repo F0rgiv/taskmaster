@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
+import com.amplifyframework.AmplifyException;
+import com.amplifyframework.core.Amplify;
 import com.f0rgiv.taskmaster.R;
 import com.f0rgiv.taskmaster.adapters.TaskRecyclerAdapter;
 import com.f0rgiv.taskmaster.models.Task;
@@ -52,13 +54,18 @@ public class MainActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
+    try {
+      Amplify.configure(getApplicationContext());
+      Log.i("MyAmplifyApp", "Initialized Amplify");
+    } catch (AmplifyException error) {
+      Log.e("MyAmplifyApp", "Could not initialize Amplify", error);
+    }
+
     findViewById(R.id.addTaskButton).setOnClickListener(view ->
       MainActivity.this.startActivity(new Intent(MainActivity.this, AddTask.class)));
 
     findViewById(R.id.allTasks).setOnClickListener(view ->
       MainActivity.this.startActivity(new Intent(MainActivity.this, AllTasks.class)));
-
-
   }
 
   @Override
