@@ -1,5 +1,6 @@
-type Todo @model {
+type CloudTask @model {
   id: ID!
   name: String!
   description: String
+  state: String
 }
