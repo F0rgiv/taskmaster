@@ -1,10 +1,80 @@
 # this is an auto generated file. This will be overwritten
+subscription OnCreateCloudTeam {
+  onCreateCloudTeam {
+    id
+    name
+    cloudTasks {
+      items {
+        id
+        cloudTeamId
+        name
+        description
+        state
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateCloudTeam {
+  onUpdateCloudTeam {
+    id
+    name
+    cloudTasks {
+      items {
+        id
+        cloudTeamId
+        name
+        description
+        state
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteCloudTeam {
+  onDeleteCloudTeam {
+    id
+    name
+    cloudTasks {
+      items {
+        id
+        cloudTeamId
+        name
+        description
+        state
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
 subscription OnCreateCloudTask {
   onCreateCloudTask {
     id
+    cloudTeamId
     name
     description
     state
+    team {
+      id
+      name
+      cloudTasks {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
     createdAt
     updatedAt
   }
@@ -12,9 +82,19 @@ subscription OnCreateCloudTask {
 subscription OnUpdateCloudTask {
   onUpdateCloudTask {
     id
+    cloudTeamId
     name
     description
     state
+    team {
+      id
+      name
+      cloudTasks {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
     createdAt
     updatedAt
   }
@@ -22,9 +102,19 @@ subscription OnUpdateCloudTask {
 subscription OnDeleteCloudTask {
   onDeleteCloudTask {
     id
+    cloudTeamId
     name
     description
     state
+    team {
+      id
+      name
+      cloudTasks {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
     createdAt
     updatedAt
   }

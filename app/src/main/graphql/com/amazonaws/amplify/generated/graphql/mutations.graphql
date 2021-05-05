@@ -1,13 +1,92 @@
 # this is an auto generated file. This will be overwritten
+mutation CreateCloudTeam(
+  $input: CreateCloudTeamInput!
+  $condition: ModelCloudTeamConditionInput
+) {
+  createCloudTeam(input: $input, condition: $condition) {
+    id
+    name
+    cloudTasks {
+      items {
+        id
+        cloudTeamId
+        name
+        description
+        state
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateCloudTeam(
+  $input: UpdateCloudTeamInput!
+  $condition: ModelCloudTeamConditionInput
+) {
+  updateCloudTeam(input: $input, condition: $condition) {
+    id
+    name
+    cloudTasks {
+      items {
+        id
+        cloudTeamId
+        name
+        description
+        state
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteCloudTeam(
+  $input: DeleteCloudTeamInput!
+  $condition: ModelCloudTeamConditionInput
+) {
+  deleteCloudTeam(input: $input, condition: $condition) {
+    id
+    name
+    cloudTasks {
+      items {
+        id
+        cloudTeamId
+        name
+        description
+        state
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
 mutation CreateCloudTask(
   $input: CreateCloudTaskInput!
   $condition: ModelCloudTaskConditionInput
 ) {
   createCloudTask(input: $input, condition: $condition) {
     id
+    cloudTeamId
     name
     description
     state
+    team {
+      id
+      name
+      cloudTasks {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
     createdAt
     updatedAt
   }
@@ -18,9 +97,19 @@ mutation UpdateCloudTask(
 ) {
   updateCloudTask(input: $input, condition: $condition) {
     id
+    cloudTeamId
     name
     description
     state
+    team {
+      id
+      name
+      cloudTasks {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
     createdAt
     updatedAt
   }
@@ -31,9 +120,19 @@ mutation DeleteCloudTask(
 ) {
   deleteCloudTask(input: $input, condition: $condition) {
     id
+    cloudTeamId
     name
     description
     state
+    team {
+      id
+      name
+      cloudTasks {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
     createdAt
     updatedAt
   }

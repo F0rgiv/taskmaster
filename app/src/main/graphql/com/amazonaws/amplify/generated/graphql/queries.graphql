@@ -1,10 +1,58 @@
 # this is an auto generated file. This will be overwritten
+query GetCloudTeam($id: ID!) {
+  getCloudTeam(id: $id) {
+    id
+    name
+    cloudTasks {
+      items {
+        id
+        cloudTeamId
+        name
+        description
+        state
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+query ListCloudTeams(
+  $filter: ModelCloudTeamFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listCloudTeams(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      name
+      cloudTasks {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
 query GetCloudTask($id: ID!) {
   getCloudTask(id: $id) {
     id
+    cloudTeamId
     name
     description
     state
+    team {
+      id
+      name
+      cloudTasks {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
     createdAt
     updatedAt
   }
@@ -17,9 +65,16 @@ query ListCloudTasks(
   listCloudTasks(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
+      cloudTeamId
       name
       description
       state
+      team {
+        id
+        name
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }

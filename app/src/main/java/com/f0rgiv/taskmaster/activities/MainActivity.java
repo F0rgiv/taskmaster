@@ -22,9 +22,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.amplifyframework.AmplifyException;
 import com.amplifyframework.api.aws.AWSApiPlugin;
 import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.CloudTask;
 import com.f0rgiv.taskmaster.R;
 import com.f0rgiv.taskmaster.adapters.TaskRecyclerAdapter;
-import com.f0rgiv.taskmaster.models.Task;
+
 import com.f0rgiv.taskmaster.repository.TaskRepository;
 
 import java.util.ArrayList;
@@ -32,7 +33,7 @@ import java.util.List;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
-  public static List<Task> tasks = new ArrayList<>();
+  public static List<CloudTask> cloudTasks = new ArrayList<>();
   String TAG = "mainActivity";
 
   Handler mainThreadHandler;
@@ -79,10 +80,10 @@ public class MainActivity extends AppCompatActivity {
     recyclerView.setLayoutManager(lm);
     recyclerView.setAdapter(new TaskRecyclerAdapter(vh -> {
       Intent intent = new Intent(MainActivity.this, TaskDetailActivity.class);
-      intent.putExtra("taskId", vh.task.id);
+      intent.putExtra("taskId", vh.cloudTask.getId());
       MainActivity.this.startActivity(intent);
     },
-      tasks));
+      cloudTasks));
 
     mainThreadHandler = new Handler(this.getMainLooper()) {
       @Override
@@ -108,8 +109,8 @@ public class MainActivity extends AppCompatActivity {
     ((TextView) findViewById(R.id.mainTasksGreetingLabel)).setText(greeting);
 
     TaskRepository.findAll(result -> {
-      tasks.clear();
-      tasks.addAll(result);
+      cloudTasks.clear();
+      cloudTasks.addAll(result);
       mainThreadHandler.sendEmptyMessage(1);
     });
   }

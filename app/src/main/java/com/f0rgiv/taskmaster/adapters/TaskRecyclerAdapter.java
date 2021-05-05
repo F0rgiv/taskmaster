@@ -8,21 +8,21 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.amplifyframework.datastore.generated.model.CloudTask;
 import com.f0rgiv.taskmaster.R;
-import com.f0rgiv.taskmaster.models.Task;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class TaskRecyclerAdapter extends RecyclerView.Adapter<TaskRecyclerAdapter.TaskViewHolder> {
-  List<Task> tasks;
+  List<CloudTask> cloudTasks;
 
   public HandleOnClickAble handleOnClickAble;
   String TAG = "mainActivity";
 
-  public TaskRecyclerAdapter(HandleOnClickAble handleOnClickAble, List<Task> tasks) {
+  public TaskRecyclerAdapter(HandleOnClickAble handleOnClickAble, List<CloudTask> cloudTasks) {
     this.handleOnClickAble = handleOnClickAble;
-    this.tasks = tasks;
+    this.cloudTasks = cloudTasks;
   }
 
   @NonNull
@@ -35,19 +35,19 @@ public class TaskRecyclerAdapter extends RecyclerView.Adapter<TaskRecyclerAdapte
 
   @Override
   public void onBindViewHolder(@NonNull TaskViewHolder holder, int position) {
-    holder.task = tasks.get(position);
-    ((Button) holder.itemView.findViewById(R.id.taskFragmentTaskButton)).setText(holder.task.title);
+    holder.cloudTask = cloudTasks.get(position);
+    ((Button) holder.itemView.findViewById(R.id.taskFragmentTaskButton)).setText(holder.cloudTask.getName());
     holder.itemView.findViewById(R.id.taskFragmentTaskButton).setOnClickListener(view -> handleOnClickAble.handleClickOnTask(holder));
   }
 
   @Override
   public int getItemCount() {
-    return tasks.size();
+    return cloudTasks.size();
   }
 
   public static abstract class HandleOnClickTask {
     abstract void handleClickOnTask(TaskViewHolder taskViewHolder);
-    List<Task> tasks = new ArrayList<>();
+    List<CloudTask> cloudTasks = new ArrayList<>();
   }
 
   public interface HandleOnClickAble {
@@ -56,7 +56,7 @@ public class TaskRecyclerAdapter extends RecyclerView.Adapter<TaskRecyclerAdapte
 
 
   public static class TaskViewHolder extends RecyclerView.ViewHolder {
-    public Task task;
+    public CloudTask cloudTask;
 
     public TaskViewHolder(@NonNull View itemView) {
       super(itemView);

@@ -1,6 +1,16 @@
-type CloudTask @model {
+type CloudTeam @model {
   id: ID!
+  name: String
+  cloudTasks: [CloudTask] @connection(keyName: "byTask", fields : ["id"])
+}
+
+type CloudTask @model
+@key(name: "byTask", fields: ["cloudTeamId"])
+{
+  id: ID!
+  cloudTeamId: ID!
   name: String
   description: String
   state: String
+  team: CloudTeam! @connection(fields : ["cloudTeamId"])
 }

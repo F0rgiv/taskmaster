@@ -6,7 +6,6 @@ import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.CloudTask;
-import com.f0rgiv.taskmaster.models.Task;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,12 +13,7 @@ import java.util.List;
 public class TaskRepository {
   static String TAG = "TaskRepository";
 
-  public static void insert(Task task) {
-    CloudTask cloudTask = CloudTask.builder()
-      .name(task.title)
-      .state(task.state)
-      .description(task.description)
-      .build();
+  public static void insert(com.amplifyframework.datastore.generated.model.CloudTask cloudTask) {
     Amplify.API.mutate(
       ModelMutation.create(cloudTask),
       response -> Log.i(TAG, "insert: was successful!"),
@@ -29,30 +23,28 @@ public class TaskRepository {
 
   public static void findById(String id, TaskCallback tc) {
     Amplify.API.query(
-      ModelQuery.get(CloudTask.class, id),
+      ModelQuery.get(com.amplifyframework.datastore.generated.model.CloudTask.class, id),
       response -> {
         if (response.getData() == null) return;
-        CloudTask task = response.getData();
-        tc.taskCallback(new Task(task.getId(), task.getName(), task.getDescription(), task.getState()));
+        com.amplifyframework.datastore.generated.model.CloudTask cloudTask = response.getData();
+        tc.taskCallback(response.getData());
       },
       response -> {
         //get from the local Db
-
       }
     );
   }
 
   public static void findAll(TasksCallback tc) {
-    List<Task> result = new ArrayList<>();
-    final boolean[] ready = {false};
+    List<CloudTask> result = new ArrayList<>();
     Log.i(TAG, "findAll: about to start");
     Amplify.API.query(
-      ModelQuery.list(CloudTask.class),
+      ModelQuery.list(com.amplifyframework.datastore.generated.model.CloudTask.class),
       response -> {
         Log.i(TAG, response.toString());
         if (response.getData() != null) {
-          for (CloudTask task : response.getData()) {
-            result.add(new Task(task.getId(), task.getName(), task.getDescription(), task.getState()));
+          for (CloudTask cloudTask : response.getData()) {
+            result.add(cloudTask);
           }
         }
         tc.tasksCallback(result);
@@ -65,10 +57,10 @@ public class TaskRepository {
   }
 
   public interface TasksCallback {
-    void tasksCallback(List<Task> tasks);
+    void tasksCallback(List<CloudTask> cloudTasks);
   }
 
   public interface TaskCallback {
-    void taskCallback(Task task);
+    void taskCallback(CloudTask cloudTask);
   }
 }

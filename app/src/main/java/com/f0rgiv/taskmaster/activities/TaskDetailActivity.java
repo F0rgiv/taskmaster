@@ -2,23 +2,18 @@ package com.f0rgiv.taskmaster.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Room;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.provider.ContactsContract;
-import android.util.Log;
 import android.widget.TextView;
 
+import com.amplifyframework.datastore.generated.model.CloudTask;
 import com.f0rgiv.taskmaster.R;
-import com.f0rgiv.taskmaster.models.Task;
 import com.f0rgiv.taskmaster.repository.TaskRepository;
-import com.f0rgiv.taskmaster.service.DatabaseManager;
 
 public class TaskDetailActivity extends AppCompatActivity {
-  Task task;
+  CloudTask cloudTask;
   Handler mainThreadHandler;
 
   @Override
@@ -31,15 +26,15 @@ public class TaskDetailActivity extends AppCompatActivity {
       public void handleMessage(@NonNull Message msg) {
         super.handleMessage(msg);
         if (msg.what == 3) {
-          ((TextView) findViewById(R.id.taskDetailTitle)).setText(task.title);
-          ((TextView) findViewById(R.id.taskDetailDetail)).setText(task.description);
-          ((TextView) findViewById(R.id.taskDetailStatus)).setText(task.state);
+          ((TextView) findViewById(R.id.taskDetailTitle)).setText(cloudTask.getName());
+          ((TextView) findViewById(R.id.taskDetailDetail)).setText(cloudTask.getDescription());
+          ((TextView) findViewById(R.id.taskDetailStatus)).setText(cloudTask.getState());
         }
       }
     };
 
     TaskRepository.findById(getIntent().getStringExtra("taskId"), result -> {
-      task = result;
+      cloudTask = result;
       mainThreadHandler.sendEmptyMessage(3);
     });
   }

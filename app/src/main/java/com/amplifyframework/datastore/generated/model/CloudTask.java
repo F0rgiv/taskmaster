@@ -1,5 +1,6 @@
 package com.amplifyframework.datastore.generated.model;
 
+import com.amplifyframework.core.model.annotations.BelongsTo;
 
 import java.util.List;
 import java.util.UUID;
@@ -18,15 +19,18 @@ import static com.amplifyframework.core.model.query.predicate.QueryField.field;
 /** This is an auto generated class representing the CloudTask type in your schema. */
 @SuppressWarnings("all")
 @ModelConfig(pluralName = "CloudTasks")
+@Index(name = "byTask", fields = {"cloudTeamId"})
 public final class CloudTask implements Model {
   public static final QueryField ID = field("CloudTask", "id");
   public static final QueryField NAME = field("CloudTask", "name");
   public static final QueryField DESCRIPTION = field("CloudTask", "description");
   public static final QueryField STATE = field("CloudTask", "state");
+  public static final QueryField TEAM = field("CloudTask", "cloudTeamId");
   private final @ModelField(targetType="ID", isRequired = true) String id;
   private final @ModelField(targetType="String") String name;
   private final @ModelField(targetType="String") String description;
   private final @ModelField(targetType="String") String state;
+  private final @ModelField(targetType="CloudTeam", isRequired = true) @BelongsTo(targetName = "cloudTeamId", type = CloudTeam.class) CloudTeam team;
   public String getId() {
       return id;
   }
@@ -43,11 +47,16 @@ public final class CloudTask implements Model {
       return state;
   }
   
-  private CloudTask(String id, String name, String description, String state) {
+  public CloudTeam getTeam() {
+      return team;
+  }
+  
+  private CloudTask(String id, String name, String description, String state, CloudTeam team) {
     this.id = id;
     this.name = name;
     this.description = description;
     this.state = state;
+    this.team = team;
   }
   
   @Override
@@ -61,7 +70,8 @@ public final class CloudTask implements Model {
       return ObjectsCompat.equals(getId(), cloudTask.getId()) &&
               ObjectsCompat.equals(getName(), cloudTask.getName()) &&
               ObjectsCompat.equals(getDescription(), cloudTask.getDescription()) &&
-              ObjectsCompat.equals(getState(), cloudTask.getState());
+              ObjectsCompat.equals(getState(), cloudTask.getState()) &&
+              ObjectsCompat.equals(getTeam(), cloudTask.getTeam());
       }
   }
   
@@ -72,6 +82,7 @@ public final class CloudTask implements Model {
       .append(getName())
       .append(getDescription())
       .append(getState())
+      .append(getTeam())
       .toString()
       .hashCode();
   }
@@ -83,12 +94,13 @@ public final class CloudTask implements Model {
       .append("id=" + String.valueOf(getId()) + ", ")
       .append("name=" + String.valueOf(getName()) + ", ")
       .append("description=" + String.valueOf(getDescription()) + ", ")
-      .append("state=" + String.valueOf(getState()))
+      .append("state=" + String.valueOf(getState()) + ", ")
+      .append("team=" + String.valueOf(getTeam()))
       .append("}")
       .toString();
   }
   
-  public static BuildStep builder() {
+  public static TeamStep builder() {
       return new Builder();
   }
   
@@ -115,6 +127,7 @@ public final class CloudTask implements Model {
       id,
       null,
       null,
+      null,
       null
     );
   }
@@ -123,8 +136,14 @@ public final class CloudTask implements Model {
     return new CopyOfBuilder(id,
       name,
       description,
-      state);
+      state,
+      team);
   }
+  public interface TeamStep {
+    BuildStep team(CloudTeam team);
+  }
+  
+
   public interface BuildStep {
     CloudTask build();
     BuildStep id(String id) throws IllegalArgumentException;
@@ -134,8 +153,9 @@ public final class CloudTask implements Model {
   }
   
 
-  public static class Builder implements BuildStep {
+  public static class Builder implements TeamStep, BuildStep {
     private String id;
+    private CloudTeam team;
     private String name;
     private String description;
     private String state;
@@ -147,7 +167,15 @@ public final class CloudTask implements Model {
           id,
           name,
           description,
-          state);
+          state,
+          team);
+    }
+    
+    @Override
+     public BuildStep team(CloudTeam team) {
+        Objects.requireNonNull(team);
+        this.team = team;
+        return this;
     }
     
     @Override
@@ -191,11 +219,17 @@ public final class CloudTask implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, String name, String description, String state) {
+    private CopyOfBuilder(String id, String name, String description, String state, CloudTeam team) {
       super.id(id);
-      super.name(name)
+      super.team(team)
+        .name(name)
         .description(description)
         .state(state);
+    }
+    
+    @Override
+     public CopyOfBuilder team(CloudTeam team) {
+      return (CopyOfBuilder) super.team(team);
     }
     
     @Override
