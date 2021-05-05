@@ -26,4 +26,7 @@ v 0.4
   * getById
   * insert
 
+v 0.5
+* backend update only: Now using Amplify to store data on remote server as compared to the local phone.
+
 ![image description](screenshots/homepage.PNG)
