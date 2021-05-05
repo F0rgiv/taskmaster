@@ -1,23 +1,25 @@
 # this is an auto generated file. This will be overwritten
-query GetTodo($id: ID!) {
-  getTodo(id: $id) {
+query GetCloudTask($id: ID!) {
+  getCloudTask(id: $id) {
     id
     name
     description
+    state
     createdAt
     updatedAt
   }
 }
-query ListTodos(
-  $filter: ModelTodoFilterInput
+query ListCloudTasks(
+  $filter: ModelCloudTaskFilterInput
   $limit: Int
   $nextToken: String
 ) {
-  listTodos(filter: $filter, limit: $limit, nextToken: $nextToken) {
+  listCloudTasks(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
       name
       description
+      state
       createdAt
       updatedAt
     }
