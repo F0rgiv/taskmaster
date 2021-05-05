@@ -27,9 +27,9 @@ public class TaskRepository {
     );
   }
 
-  public static void findById(Long id, TaskCallback tc) {
+  public static void findById(String id, TaskCallback tc) {
     Amplify.API.query(
-      ModelQuery.get(CloudTask.class, id.toString()),
+      ModelQuery.get(CloudTask.class, id),
       response -> {
         if (response.getData() == null) return;
         CloudTask task = response.getData();
