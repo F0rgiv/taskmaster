@@ -42,7 +42,7 @@ public class TaskRepository {
     );
   }
 
-  public void findAll(TasksCallback tc) {
+  public static void findAll(TasksCallback tc) {
     List<Task> result = new ArrayList<>();
     final boolean[] ready = {false};
     Log.i(TAG, "findAll: about to start");
