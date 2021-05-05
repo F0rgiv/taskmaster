@@ -1,36 +1,39 @@
 # this is an auto generated file. This will be overwritten
-mutation CreateTodo(
-  $input: CreateTodoInput!
-  $condition: ModelTodoConditionInput
+mutation CreateCloudTask(
+  $input: CreateCloudTaskInput!
+  $condition: ModelCloudTaskConditionInput
 ) {
-  createTodo(input: $input, condition: $condition) {
+  createCloudTask(input: $input, condition: $condition) {
     id
     name
     description
+    state
     createdAt
     updatedAt
   }
 }
-mutation UpdateTodo(
-  $input: UpdateTodoInput!
-  $condition: ModelTodoConditionInput
+mutation UpdateCloudTask(
+  $input: UpdateCloudTaskInput!
+  $condition: ModelCloudTaskConditionInput
 ) {
-  updateTodo(input: $input, condition: $condition) {
+  updateCloudTask(input: $input, condition: $condition) {
     id
     name
     description
+    state
     createdAt
     updatedAt
   }
 }
-mutation DeleteTodo(
-  $input: DeleteTodoInput!
-  $condition: ModelTodoConditionInput
+mutation DeleteCloudTask(
+  $input: DeleteCloudTaskInput!
+  $condition: ModelCloudTaskConditionInput
 ) {
-  deleteTodo(input: $input, condition: $condition) {
+  deleteCloudTask(input: $input, condition: $condition) {
     id
     name
     description
+    state
     createdAt
     updatedAt
   }

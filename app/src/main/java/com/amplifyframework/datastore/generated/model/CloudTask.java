@@ -24,7 +24,7 @@ public final class CloudTask implements Model {
   public static final QueryField DESCRIPTION = field("CloudTask", "description");
   public static final QueryField STATE = field("CloudTask", "state");
   private final @ModelField(targetType="ID", isRequired = true) String id;
-  private final @ModelField(targetType="String", isRequired = true) String name;
+  private final @ModelField(targetType="String") String name;
   private final @ModelField(targetType="String") String description;
   private final @ModelField(targetType="String") String state;
   public String getId() {
@@ -88,7 +88,7 @@ public final class CloudTask implements Model {
       .toString();
   }
   
-  public static NameStep builder() {
+  public static BuildStep builder() {
       return new Builder();
   }
   
@@ -125,20 +125,16 @@ public final class CloudTask implements Model {
       description,
       state);
   }
-  public interface NameStep {
-    BuildStep name(String name);
-  }
-  
-
   public interface BuildStep {
     CloudTask build();
     BuildStep id(String id) throws IllegalArgumentException;
+    BuildStep name(String name);
     BuildStep description(String description);
     BuildStep state(String state);
   }
   
 
-  public static class Builder implements NameStep, BuildStep {
+  public static class Builder implements BuildStep {
     private String id;
     private String name;
     private String description;
@@ -156,7 +152,6 @@ public final class CloudTask implements Model {
     
     @Override
      public BuildStep name(String name) {
-        Objects.requireNonNull(name);
         this.name = name;
         return this;
     }
