@@ -31,8 +31,6 @@ public class Settings extends AppCompatActivity {
 
     Handler mainThreadHandler;
 
-    teamRepository = new TeamRepository();
-
     SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
     SharedPreferences.Editor preferencesEditor = preferences.edit();
 
@@ -62,10 +60,8 @@ public class Settings extends AppCompatActivity {
 
     //populates teams
     TeamRepository.findAll(teamsResult -> {
-      for (CloudTeam team : teamsResult) teams.add(team);
+      teams.addAll(teamsResult);
       mainThreadHandler.sendEmptyMessage(4);
     });
-
-
   }
 }
