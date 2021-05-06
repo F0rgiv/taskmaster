@@ -29,4 +29,10 @@ v 0.4
 v 0.5
 * backend update only: Now using Amplify to store data on remote server as compared to the local phone.
 
+v 0.6
+* adds the concept of teams
+* user can set a team for themselves
+* able to create tasks for different teams
+* user only seas tasks on the hom screen assigned to themselves.
+
 ![image description](screenshots/homepage.PNG)
