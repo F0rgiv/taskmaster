@@ -47,13 +47,11 @@ public class MainActivity extends AppCompatActivity {
 
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
-    switch (item.getItemId()) {
-      case R.id.go_to_settings:
-        MainActivity.this.startActivity(new Intent(MainActivity.this, Settings.class));
-        return true;
-      default:
-        return true;
+    if (item.getItemId() == R.id.go_to_settings) {
+      MainActivity.this.startActivity(new Intent(MainActivity.this, Settings.class));
+      return true;
     }
+    return true;
   }
 
   @Override
@@ -108,7 +106,8 @@ public class MainActivity extends AppCompatActivity {
     if (username != null) greeting = String.format(Locale.ENGLISH, "%s's tasks", username);
     ((TextView) findViewById(R.id.mainTasksGreetingLabel)).setText(greeting);
 
-    TaskRepository.findAll(result -> {
+    String teamName = preferences.getString("teamname", null);
+    TaskRepository.findByTeam(teamName, result -> {
       cloudTasks.clear();
       cloudTasks.addAll(result);
       mainThreadHandler.sendEmptyMessage(1);

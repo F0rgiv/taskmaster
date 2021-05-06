@@ -56,6 +56,27 @@ public class TaskRepository {
     );
   }
 
+  public static void findByTeam(String teamName, TasksCallback tc) {
+    List<CloudTask> result = new ArrayList<>();
+    Log.i(TAG, "findAll: about to start");
+    Amplify.API.query(
+      ModelQuery.list(com.amplifyframework.datastore.generated.model.CloudTask.class),
+      response -> {
+        Log.i(TAG, response.toString());
+        if (response.getData() != null) {
+          for (CloudTask cloudTask : response.getData()) {
+            if (cloudTask.getTeam().getName().contentEquals(teamName))result.add(cloudTask);
+          }
+        }
+        tc.tasksCallback(result);
+      },
+      response -> {
+        //save to local
+        Log.i(TAG, "findAll: failed");
+      }
+    );
+  }
+
   public interface TasksCallback {
     void tasksCallback(List<CloudTask> cloudTasks);
   }
