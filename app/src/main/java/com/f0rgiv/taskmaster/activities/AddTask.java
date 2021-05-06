@@ -78,6 +78,7 @@ public class AddTask extends AppCompatActivity {
     super.onResume();
     updateTotalTasks();
     TeamRepository.findAll(teamsResult -> {
+      teams.clear();
       teams.addAll(teamsResult);
       mainThreadHandler.sendEmptyMessage(4);
     });

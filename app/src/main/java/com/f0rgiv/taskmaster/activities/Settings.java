@@ -60,6 +60,7 @@ public class Settings extends AppCompatActivity {
 
     //populates teams
     TeamRepository.findAll(teamsResult -> {
+      teams.clear();
       teams.addAll(teamsResult);
       mainThreadHandler.sendEmptyMessage(4);
     });
