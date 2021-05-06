@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
     if (username != null) greeting = String.format(Locale.ENGLISH, "%s's tasks", username);
     ((TextView) findViewById(R.id.mainTasksGreetingLabel)).setText(greeting);
 
-    String teamName = preferences.getString("teamname", null);
+    String teamName = preferences.getString("teamname", "none");
     TaskRepository.findByTeam(teamName, result -> {
       cloudTasks.clear();
       cloudTasks.addAll(result);

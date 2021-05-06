@@ -65,6 +65,7 @@ public class TaskRepository {
         Log.i(TAG, response.toString());
         if (response.getData() != null) {
           for (CloudTask cloudTask : response.getData()) {
+            Log.i(TAG, String.format("teamName: %s, TaskTeamName: %s", teamName, cloudTask.getTeam().getName()));
             if (cloudTask.getTeam().getName().contentEquals(teamName))result.add(cloudTask);
           }
         }
