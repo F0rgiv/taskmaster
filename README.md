@@ -35,4 +35,9 @@ v 0.6
 * able to create tasks for different teams
 * user only seas tasks on the hom screen assigned to themselves.
 
+v1.0
+* published the initial application to Android
+* pushed apk to play store console.
+  * version numbers have been incremented within the build file.
+
 ![image description](screenshots/homepage.PNG)

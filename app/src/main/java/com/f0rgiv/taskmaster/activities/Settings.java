@@ -50,10 +50,8 @@ public class Settings extends AppCompatActivity {
       public void handleMessage(@NonNull Message msg) {
         super.handleMessage(msg);
         if (msg.what == 4) {
-          Spinner spinner = (Spinner) findViewById(R.id.teamSpinner);
-          ArrayAdapter<CloudTeam> adapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, teams);
-          adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-          spinner.setAdapter(adapter);
+          Spinner spinner = findViewById(R.id.teamSpinner);
+          spinner.setAdapter(new ArrayAdapter<>(Settings.this, android.R.layout.simple_spinner_dropdown_item, teams));
         }
       }
     };
