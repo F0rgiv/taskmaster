@@ -170,16 +170,6 @@ public class MainActivityTest3 {
 
     pressBack();
 
-    ViewInteraction overflowMenuButton2 = onView(
-      allOf(withContentDescription("More options"),
-        childAtPosition(
-          childAtPosition(
-            withId(R.id.action_bar),
-            1),
-          0),
-        isDisplayed()));
-    overflowMenuButton2.perform(click());
-
     ViewInteraction materialButton4 = onView(
       allOf(withId(R.id.addTaskButton), withText("Add Task"),
         childAtPosition(

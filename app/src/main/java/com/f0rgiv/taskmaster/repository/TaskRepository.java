@@ -2,6 +2,7 @@ package com.f0rgiv.taskmaster.repository;
 
 import android.util.Log;
 
+import com.amplifyframework.api.graphql.GraphQLRequest;
 import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
@@ -45,6 +46,29 @@ public class TaskRepository {
         if (response.getData() != null) {
           for (CloudTask cloudTask : response.getData()) {
             result.add(cloudTask);
+          }
+        }
+        tc.tasksCallback(result);
+      },
+      response -> {
+        //save to local
+        Log.i(TAG, "findAll: failed");
+      }
+    );
+  }
+
+
+  public static void findByTeam2(String teamName, TasksCallback tc) {
+    List<CloudTask> result = new ArrayList<>();
+    Log.i(TAG, "findAll: about to start");
+    Amplify.API.query(
+      ModelQuery.list(CloudTask.class, CloudTask.TEAM.contains(teamName)),
+      response -> {
+        Log.i(TAG, response.toString());
+        if (response.getData() != null) {
+          for (CloudTask cloudTask : response.getData()) {
+            Log.i(TAG, String.format("teamName: %s, TaskTeamName: %s", teamName, cloudTask.getTeam().getName()));
+            if (cloudTask.getTeam().getName().contentEquals(teamName))result.add(cloudTask);
           }
         }
         tc.tasksCallback(result);
