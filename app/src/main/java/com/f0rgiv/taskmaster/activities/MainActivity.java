@@ -27,13 +27,8 @@ import com.amplifyframework.datastore.generated.model.CloudTask;
 import com.amplifyframework.storage.s3.AWSS3StoragePlugin;
 import com.f0rgiv.taskmaster.R;
 import com.f0rgiv.taskmaster.adapters.TaskRecyclerAdapter;
-
 import com.f0rgiv.taskmaster.repository.TaskRepository;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -66,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
-    configureAplify();
+    configureAmplify();
 
     findViewById(R.id.addTaskButton).setOnClickListener(view ->
       MainActivity.this.startActivity(new Intent(MainActivity.this, AddTask.class)));
@@ -96,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
     };
   }
 
-  private void configureAplify() {
+  private void configureAmplify() {
     try {
       Amplify.addPlugin(new AWSApiPlugin());
       Amplify.addPlugin(new AWSCognitoAuthPlugin());
