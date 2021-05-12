@@ -28,7 +28,17 @@
     android:text="@string/add_task"
     app:layout_constraintBottom_toTopOf="@+id/totalTasksText"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/editTextNewTeskDescription" />
+    app:layout_constraintTop_toBottomOf="@+id/editTextNewTaskDescription" />
+
+  <Button
+    android:id="@+id/getPhotoForNewTask"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="32dp"
+    android:text="@string/atatchFile"
+    app:layout_constraintBottom_toTopOf="@+id/totalTasksText"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/editTextNewTaskDescription" />
 
   <TextView
     android:id="@+id/totalTasksText"
@@ -48,14 +58,14 @@
     android:ems="10"
     android:hint="@string/my_task"
     android:inputType="textPersonName"
-    app:layout_constraintBottom_toTopOf="@+id/editTextNewTeskDescription"
+    app:layout_constraintBottom_toTopOf="@+id/editTextNewTaskDescription"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintHorizontal_bias="0.5"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/addTaskTeamSpinner" />
 
   <EditText
-    android:id="@+id/editTextNewTeskDescription"
+    android:id="@+id/editTextNewTaskDescription"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:autofillHints=""
@@ -81,8 +91,8 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="@string/description"
-    app:layout_constraintBottom_toTopOf="@+id/editTextNewTeskDescription"
-    app:layout_constraintStart_toStartOf="@+id/editTextNewTeskDescription" />
+    app:layout_constraintBottom_toTopOf="@+id/editTextNewTaskDescription"
+    app:layout_constraintStart_toStartOf="@+id/editTextNewTaskDescription" />
 
   <TextView
     android:id="@+id/submitMsgText"

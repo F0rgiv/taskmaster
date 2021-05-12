@@ -21,6 +21,7 @@
     android:id="@+id/editTextUsername"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="32dp"
     android:ems="10"
     android:hint="@string/username"
     android:importantForAutofill="no"
@@ -36,7 +37,7 @@
     android:layout_height="wrap_content"
     android:text="@string/save"
     app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintEnd_toStartOf="@+id/SettingsSignUpButton"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/editTextUsername" />
 
@@ -50,9 +51,10 @@
 
   <TextView
     android:id="@+id/currentuUernameText"
-    android:layout_width="0dp"
-    android:layout_height="20dp"
+    android:layout_width="388dp"
+    android:layout_height="51dp"
     android:layout_marginBottom="128dp"
+    android:textAlignment="center"
     app:layout_constraintBottom_toTopOf="@+id/teamSpinner"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintHorizontal_bias="0.5"
@@ -68,4 +70,34 @@
     app:layout_constraintHorizontal_bias="0.5"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/currentuUernameText" />
+
+  <Button
+    android:id="@+id/SettingsSignUpButton"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Sign up"
+    app:layout_constraintBottom_toTopOf="@+id/SettingsSignInButton"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toEndOf="@+id/saveSettingsButton"
+    app:layout_constraintTop_toTopOf="@+id/saveSettingsButton" />
+
+  <TextView
+    android:id="@+id/textView12"
+    android:layout_width="100dp"
+    android:layout_height="37dp"
+    android:text="Sign Up to Save files to tasks."
+    app:layout_constraintBottom_toTopOf="@+id/SettingsSignUpButton"
+    app:layout_constraintEnd_toEndOf="@+id/SettingsSignUpButton"
+    app:layout_constraintStart_toStartOf="@+id/SettingsSignUpButton" />
+
+  <Button
+    android:id="@+id/SettingsSignInButton"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:text="Sign In"
+    app:layout_constraintBottom_toBottomOf="@+id/saveSettingsButton"
+    app:layout_constraintEnd_toEndOf="@+id/SettingsSignUpButton"
+    app:layout_constraintStart_toStartOf="@+id/SettingsSignUpButton"
+    app:layout_constraintTop_toBottomOf="@+id/SettingsSignUpButton" />
 </androidx.constraintlayout.widget.ConstraintLayout>

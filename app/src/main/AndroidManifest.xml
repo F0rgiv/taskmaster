@@ -11,10 +11,15 @@
     android:roundIcon="@mipmap/ic_launcher_round"
     android:supportsRtl="true"
     android:theme="@style/Theme.Taskmaster">
+    <activity android:name=".activities.SignIn"></activity>
+    <activity android:name=".activities.SignUpConfirmation" />
+    <activity android:name=".activities.SignUp" />
+
+
     <service
       android:name=".service.DataBaseManagerService"
       android:enabled="true"
-      android:exported="true"></service>
+      android:exported="true" />
 
     <activity android:name=".activities.TaskDetailActivity" />
     <activity

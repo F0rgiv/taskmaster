@@ -72,7 +72,7 @@ public class MainActivityTest {
     appCompatEditText2.perform(pressImeActionButton());
 
     ViewInteraction appCompatEditText3 = onView(
-      allOf(withId(R.id.editTextNewTeskDescription),
+      allOf(withId(R.id.editTextNewTaskDescription),
         childAtPosition(
           allOf(withId(R.id.addTaskButton),
             childAtPosition(
@@ -83,7 +83,7 @@ public class MainActivityTest {
     appCompatEditText3.perform(replaceText("hi"), closeSoftKeyboard());
 
     ViewInteraction appCompatEditText4 = onView(
-      allOf(withId(R.id.editTextNewTeskDescription), withText("hi"),
+      allOf(withId(R.id.editTextNewTaskDescription), withText("hi"),
         childAtPosition(
           allOf(withId(R.id.addTaskButton),
             childAtPosition(

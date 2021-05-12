@@ -67,7 +67,7 @@ public class MainActivityTest3 {
     appCompatEditText.perform(replaceText("go it"), closeSoftKeyboard());
 
     ViewInteraction appCompatEditText2 = onView(
-      allOf(withId(R.id.editTextNewTeskDescription),
+      allOf(withId(R.id.editTextNewTaskDescription),
         childAtPosition(
           allOf(withId(R.id.addTaskButton),
             childAtPosition(
@@ -78,7 +78,7 @@ public class MainActivityTest3 {
     appCompatEditText2.perform(replaceText("fgh I h to"), closeSoftKeyboard());
 
     ViewInteraction appCompatEditText3 = onView(
-      allOf(withId(R.id.editTextNewTeskDescription), withText("fgh I h to"),
+      allOf(withId(R.id.editTextNewTaskDescription), withText("fgh I h to"),
         childAtPosition(
           allOf(withId(R.id.addTaskButton),
             childAtPosition(
@@ -192,7 +192,7 @@ public class MainActivityTest3 {
     appCompatEditText6.perform(replaceText("task"), closeSoftKeyboard());
 
     ViewInteraction appCompatEditText7 = onView(
-      allOf(withId(R.id.editTextNewTeskDescription),
+      allOf(withId(R.id.editTextNewTaskDescription),
         childAtPosition(
           allOf(withId(R.id.addTaskButton),
             childAtPosition(
@@ -203,7 +203,7 @@ public class MainActivityTest3 {
     appCompatEditText7.perform(replaceText("task detail"), closeSoftKeyboard());
 
     ViewInteraction appCompatEditText8 = onView(
-      allOf(withId(R.id.editTextNewTeskDescription), withText("task detail"),
+      allOf(withId(R.id.editTextNewTaskDescription), withText("task detail"),
         childAtPosition(
           allOf(withId(R.id.addTaskButton),
             childAtPosition(
@@ -266,7 +266,7 @@ public class MainActivityTest3 {
     appCompatEditText9.perform(replaceText("team two task"), closeSoftKeyboard());
 
     ViewInteraction appCompatEditText10 = onView(
-      allOf(withId(R.id.editTextNewTeskDescription),
+      allOf(withId(R.id.editTextNewTaskDescription),
         childAtPosition(
           allOf(withId(R.id.addTaskButton),
             childAtPosition(
@@ -277,7 +277,7 @@ public class MainActivityTest3 {
     appCompatEditText10.perform(replaceText("thanks for the invite \uD83D\uDE0A\uD83D\uDE0A\uD83D\uDE0A\uD83D\uDC4D"), closeSoftKeyboard());
 
     ViewInteraction appCompatEditText11 = onView(
-      allOf(withId(R.id.editTextNewTeskDescription), withText("thanks for the invite \uD83D\uDE0A\uD83D\uDE0A\uD83D\uDE0A\uD83D\uDC4D"),
+      allOf(withId(R.id.editTextNewTaskDescription), withText("thanks for the invite \uD83D\uDE0A\uD83D\uDE0A\uD83D\uDE0A\uD83D\uDC4D"),
         childAtPosition(
           allOf(withId(R.id.addTaskButton),
             childAtPosition(

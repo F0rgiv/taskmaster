@@ -21,13 +21,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.amplifyframework.AmplifyException;
 import com.amplifyframework.api.aws.AWSApiPlugin;
+import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.CloudTask;
+import com.amplifyframework.storage.s3.AWSS3StoragePlugin;
 import com.f0rgiv.taskmaster.R;
 import com.f0rgiv.taskmaster.adapters.TaskRecyclerAdapter;
 
 import com.f0rgiv.taskmaster.repository.TaskRepository;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -59,13 +65,9 @@ public class MainActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
-    try {
-      Amplify.addPlugin(new AWSApiPlugin());
-      Amplify.configure(getApplicationContext());
-      Log.i(TAG, "Initialized Amplify");
-    } catch (AmplifyException error) {
-      Log.e(TAG, "Could not initialize Amplify", error);
-    }
+    configureAplify();
+//    loadFileFromS3();
+//    getAFileFromPhone();
 
     findViewById(R.id.addTaskButton).setOnClickListener(view ->
       MainActivity.this.startActivity(new Intent(MainActivity.this, AddTask.class)));
@@ -93,6 +95,18 @@ public class MainActivity extends AppCompatActivity {
         }
       }
     };
+  }
+
+  private void configureAplify() {
+    try {
+      Amplify.addPlugin(new AWSApiPlugin());
+      Amplify.addPlugin(new AWSCognitoAuthPlugin());
+      Amplify.addPlugin(new AWSS3StoragePlugin());
+      Amplify.configure(getApplicationContext());
+      Log.i(TAG, "Initialized Amplify");
+    } catch (AmplifyException error) {
+      Log.e(TAG, "Could not initialize Amplify", error);
+    }
   }
 
   @RequiresApi(api = Build.VERSION_CODES.N)
