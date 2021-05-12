@@ -21,19 +21,15 @@ String TAG = "signup";
 
     String username = getIntent().getStringExtra("username");
 
-    findViewById(R.id.SignUpConfirmationButton).setOnClickListener(v -> {
-        Amplify.Auth.confirmSignUp(
-          username,
-          ((EditText) findViewById(R.id.SignUpConfirmationCode)).getText().toString(),
-          r -> {
-            Log.i(TAG, "onCreate: confirmed");
-            startActivity(new Intent(SignUpConfirmation.this, SignIn.class));
-          },
-          r -> {
-            Toast.makeText(SignUpConfirmation.this, "confirmation code failed", Toast.LENGTH_LONG);
-          }
-        );
-      }
+    findViewById(R.id.SignUpConfirmationButton).setOnClickListener(v -> Amplify.Auth.confirmSignUp(
+      username,
+      ((EditText) findViewById(R.id.SignUpConfirmationCode)).getText().toString(),
+      r -> {
+        Log.i(TAG, "onCreate: confirmed");
+        startActivity(new Intent(SignUpConfirmation.this, SignIn.class));
+      },
+      r -> Toast.makeText(SignUpConfirmation.this, "confirmation code failed", Toast.LENGTH_LONG).show()
+    )
     );
   }
 }

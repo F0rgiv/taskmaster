@@ -14,15 +14,15 @@ import com.amplifyframework.core.Amplify;
 import com.f0rgiv.taskmaster.R;
 
 public class SignIn extends AppCompatActivity {
-  String TAG = "Signin";
-  Handler signinHandler;
+  String TAG = "signin";
+  Handler handler;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_login2);
 
-    signinHandler = new Handler(getMainLooper()) {
+    handler = new Handler(getMainLooper()) {
       @Override
       public void handleMessage(Message msg) {
         if (msg.what == 1) {
@@ -44,8 +44,8 @@ public class SignIn extends AppCompatActivity {
       Amplify.Auth.signIn(
         username,
         password,
-        r -> signinHandler.sendEmptyMessage(1),
-        r -> signinHandler.sendEmptyMessage(2)
+        r -> handler.sendEmptyMessage(1),
+        r -> handler.sendEmptyMessage(2)
       );
     });
   }

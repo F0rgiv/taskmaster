@@ -37,6 +37,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
   public static List<CloudTask> cloudTasks = new ArrayList<>();
@@ -90,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
       public void handleMessage(@NonNull Message msg) {
         super.handleMessage(msg);
         if (msg.what == 1) {
-          recyclerView.getAdapter().notifyDataSetChanged();
+          Objects.requireNonNull(recyclerView.getAdapter()).notifyDataSetChanged();
           Log.i(TAG, "handleMessage: recycler updated");
         }
       }

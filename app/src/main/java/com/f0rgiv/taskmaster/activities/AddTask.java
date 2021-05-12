@@ -67,8 +67,6 @@ public class AddTask extends AppCompatActivity {
       try {
         InputStream is = getContentResolver().openInputStream(data.getData());
         FileUtils.copy(is, new FileOutputStream(fileToUpload));
-      } catch (FileNotFoundException e) {
-        e.printStackTrace();
       } catch (IOException e) {
         e.printStackTrace();
       }
@@ -118,7 +116,7 @@ public class AddTask extends AppCompatActivity {
           Log.i(TAG, "handleMessage: updated taskcount");
         }
         if (msg.what == 4) {
-          Spinner spinner = (Spinner) findViewById(R.id.addTaskTeamSpinner);
+          Spinner spinner = findViewById(R.id.addTaskTeamSpinner);
           ArrayAdapter<CloudTeam> adapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, teams);
           adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
           spinner.setAdapter(adapter);
