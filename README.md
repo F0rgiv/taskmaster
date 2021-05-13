@@ -40,4 +40,10 @@ v1.0
 * pushed apk to play store console.
   * version numbers have been incremented within the build file.
 
+v1.1
+* adds ability for users to sign in
+* Adds ability for users to upload a photo when creating a task and view that photo when viewing the task details.
+* Users can no receive notifications.
+
+
 ![image description](screenshots/homepage.PNG)
