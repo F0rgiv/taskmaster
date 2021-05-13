@@ -126,9 +126,10 @@ public class AddTask extends AppCompatActivity {
           .state("new")
           .build();
         TaskRepository.insert(cloudTask);
-        if (fileToUpload.exists())
-          Log.i(TAG, "onCreate: file exists");
-        AmplifyS3.saveFileToS3(getApplicationContext(), fileToUpload, cloudTask.getId());
+        if (fileToUpload.exists()) {
+          Log.i(TAG, "onCreate: file exists, file: " + fileToUpload.getTotalSpace());
+          AmplifyS3.saveFileToS3(fileToUpload, cloudTask.getId());
+        }
       });
 
     //update ui
