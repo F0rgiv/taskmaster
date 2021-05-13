@@ -64,7 +64,7 @@ public class MainActivityTest2 {
     appCompatEditText.perform(replaceText("test taask"), closeSoftKeyboard());
 
     ViewInteraction appCompatEditText2 = onView(
-      allOf(withId(R.id.editTextNewTeskDescription),
+      allOf(withId(R.id.editTextNewTaskDescription),
         childAtPosition(
           allOf(withId(R.id.addTaskButton),
             childAtPosition(
@@ -75,7 +75,7 @@ public class MainActivityTest2 {
     appCompatEditText2.perform(replaceText("this is a test"), closeSoftKeyboard());
 
     ViewInteraction appCompatEditText3 = onView(
-      allOf(withId(R.id.editTextNewTeskDescription), withText("this is a test"),
+      allOf(withId(R.id.editTextNewTaskDescription), withText("this is a test"),
         childAtPosition(
           allOf(withId(R.id.addTaskButton),
             childAtPosition(

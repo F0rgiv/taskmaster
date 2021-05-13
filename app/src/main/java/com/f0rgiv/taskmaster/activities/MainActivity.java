@@ -21,16 +21,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.amplifyframework.AmplifyException;
 import com.amplifyframework.api.aws.AWSApiPlugin;
+import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.CloudTask;
+import com.amplifyframework.storage.s3.AWSS3StoragePlugin;
 import com.f0rgiv.taskmaster.R;
 import com.f0rgiv.taskmaster.adapters.TaskRecyclerAdapter;
-
 import com.f0rgiv.taskmaster.repository.TaskRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
   public static List<CloudTask> cloudTasks = new ArrayList<>();
@@ -59,13 +61,7 @@ public class MainActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
-    try {
-      Amplify.addPlugin(new AWSApiPlugin());
-      Amplify.configure(getApplicationContext());
-      Log.i(TAG, "Initialized Amplify");
-    } catch (AmplifyException error) {
-      Log.e(TAG, "Could not initialize Amplify", error);
-    }
+    configureAmplify();
 
     findViewById(R.id.addTaskButton).setOnClickListener(view ->
       MainActivity.this.startActivity(new Intent(MainActivity.this, AddTask.class)));
@@ -88,11 +84,23 @@ public class MainActivity extends AppCompatActivity {
       public void handleMessage(@NonNull Message msg) {
         super.handleMessage(msg);
         if (msg.what == 1) {
-          recyclerView.getAdapter().notifyDataSetChanged();
+          Objects.requireNonNull(recyclerView.getAdapter()).notifyDataSetChanged();
           Log.i(TAG, "handleMessage: recycler updated");
         }
       }
     };
+  }
+
+  private void configureAmplify() {
+    try {
+      Amplify.addPlugin(new AWSApiPlugin());
+      Amplify.addPlugin(new AWSCognitoAuthPlugin());
+      Amplify.addPlugin(new AWSS3StoragePlugin());
+      Amplify.configure(getApplicationContext());
+      Log.i(TAG, "Initialized Amplify");
+    } catch (AmplifyException error) {
+      Log.e(TAG, "Could not initialize Amplify", error);
+    }
   }
 
   @RequiresApi(api = Build.VERSION_CODES.N)

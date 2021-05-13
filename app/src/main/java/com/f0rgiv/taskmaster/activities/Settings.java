@@ -3,6 +3,7 @@ package com.f0rgiv.taskmaster.activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -14,7 +15,6 @@ import android.widget.TextView;
 
 import com.amplifyframework.datastore.generated.model.CloudTeam;
 import com.f0rgiv.taskmaster.R;
-import com.f0rgiv.taskmaster.adapters.TeamSpinnerActivity;
 import com.f0rgiv.taskmaster.repository.TeamRepository;
 
 import java.util.ArrayList;
@@ -43,6 +43,16 @@ public class Settings extends AppCompatActivity {
       preferencesEditor.putString("username", username);
       preferencesEditor.putString("teamname", teamName);
       preferencesEditor.apply();
+    });
+
+    findViewById(R.id.SettingsSignUpButton).setOnClickListener(view -> {
+      Intent intent = new Intent(Settings.this, SignUp.class);
+      startActivity(intent);
+    });
+
+    findViewById(R.id.SettingsSignInButton).setOnClickListener(view -> {
+      Intent intent = new Intent(Settings.this, SignIn.class);
+      startActivity(intent);
     });
 
     mainThreadHandler = new Handler(this.getMainLooper()) {
