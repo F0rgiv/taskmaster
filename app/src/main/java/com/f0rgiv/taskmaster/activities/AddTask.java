@@ -1,6 +1,7 @@
 package com.f0rgiv.taskmaster.activities;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.FileUtils;
@@ -9,6 +10,7 @@ import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -24,6 +26,7 @@ import com.f0rgiv.taskmaster.repository.TeamRepository;
 import com.f0rgiv.taskmaster.service.AmplifyS3;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -36,6 +39,51 @@ public class AddTask extends AppCompatActivity {
   String TAG = "AddTask";
   Handler mainThreadHandler;
   File fileToUpload;
+
+  @RequiresApi(api = Build.VERSION_CODES.Q)
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_add_task);
+    updateTotalTasks();
+
+    Intent intent = getIntent();
+    if(intent.getType() != null && intent.getType().startsWith("image/")){
+      Uri uri = intent.getParcelableExtra(Intent.EXTRA_STREAM);
+      try {
+        fileToUpload = new File(getApplicationContext().getFilesDir(), "tempFile");
+        InputStream is = getContentResolver().openInputStream(uri);
+        FileUtils.copy(is, new FileOutputStream(fileToUpload));
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+      Log.i(TAG, "getFileFromPhone: Got the file from the opener");
+    }
+
+    findViewById(R.id.createNewTask).setOnClickListener(this::createNewTask);
+    findViewById(R.id.getPhotoForNewTask).setOnClickListener(view -> getFileFromPhone());
+
+    mainThreadHandler = new Handler(this.getMainLooper()) {
+      @Override
+      public void handleMessage(@NonNull Message msg) {
+        super.handleMessage(msg);
+        if (msg.what == 2) {
+          ((TextView) findViewById(R.id.totalTasksText)).setText(String.format(Locale.ENGLISH,
+            "Total tasks: %d",
+            taskCount
+          ));
+          Log.i(TAG, "handleMessage: updated taskcount");
+        }
+        if (msg.what == 4) {
+          Spinner spinner = findViewById(R.id.addTaskTeamSpinner);
+          ArrayAdapter<CloudTeam> adapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, teams);
+          adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+          spinner.setAdapter(adapter);
+        }
+        if (msg.what == 5) Log.i(TAG, "handleMessage: here???");
+      }
+    };
+  }
 
   private void getFileFromPhone() {
     Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
@@ -60,38 +108,6 @@ public class AddTask extends AppCompatActivity {
         e.printStackTrace();
       }
     }
-  }
-
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_add_task);
-    updateTotalTasks();
-
-    findViewById(R.id.createNewTask).setOnClickListener(this::createNewTask);
-
-    findViewById(R.id.getPhotoForNewTask).setOnClickListener(view -> getFileFromPhone());
-
-    mainThreadHandler = new Handler(this.getMainLooper()) {
-      @Override
-      public void handleMessage(@NonNull Message msg) {
-        super.handleMessage(msg);
-        if (msg.what == 2) {
-          ((TextView) findViewById(R.id.totalTasksText)).setText(String.format(Locale.ENGLISH,
-            "Total tasks: %d",
-            taskCount
-          ));
-          Log.i(TAG, "handleMessage: updated taskcount");
-        }
-        if (msg.what == 4) {
-          Spinner spinner = findViewById(R.id.addTaskTeamSpinner);
-          ArrayAdapter<CloudTeam> adapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, teams);
-          adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-          spinner.setAdapter(adapter);
-        }
-        if (msg.what == 5) Log.i(TAG, "handleMessage: here???");
-      }
-    };
   }
 
   @Override
