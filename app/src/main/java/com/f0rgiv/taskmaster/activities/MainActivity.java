@@ -1,5 +1,7 @@
 package com.f0rgiv.taskmaster.activities;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
@@ -16,10 +18,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.amplifyframework.AmplifyException;
+import com.amplifyframework.analytics.AnalyticsEvent;
+import com.amplifyframework.analytics.pinpoint.AWSPinpointAnalyticsPlugin;
 import com.amplifyframework.api.aws.AWSApiPlugin;
 import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
 import com.amplifyframework.core.Amplify;
@@ -28,15 +33,18 @@ import com.amplifyframework.storage.s3.AWSS3StoragePlugin;
 import com.f0rgiv.taskmaster.R;
 import com.f0rgiv.taskmaster.adapters.TaskRecyclerAdapter;
 import com.f0rgiv.taskmaster.repository.TaskRepository;
+import com.f0rgiv.taskmaster.service.AmplifyAnalytics;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AnalyticsActivity{//AppCompatActivity {
   public static List<CloudTask> cloudTasks = new ArrayList<>();
-  String TAG = "mainActivity";
+  static String TAG = "mainActivity";
+  static String OPENED_APP_EVENT = "Application opened";
 
   Handler mainThreadHandler;
 
@@ -91,18 +99,6 @@ public class MainActivity extends AppCompatActivity {
     };
   }
 
-  private void configureAmplify() {
-    try {
-      Amplify.addPlugin(new AWSApiPlugin());
-      Amplify.addPlugin(new AWSCognitoAuthPlugin());
-      Amplify.addPlugin(new AWSS3StoragePlugin());
-      Amplify.configure(getApplicationContext());
-      Log.i(TAG, "Initialized Amplify");
-    } catch (AmplifyException error) {
-      Log.e(TAG, "Could not initialize Amplify", error);
-    }
-  }
-
   @RequiresApi(api = Build.VERSION_CODES.N)
   @Override
   protected void onResume() {
@@ -120,5 +116,30 @@ public class MainActivity extends AppCompatActivity {
       cloudTasks.addAll(result);
       mainThreadHandler.sendEmptyMessage(1);
     });
+  }
+
+  private void configureAmplify() {
+    try {
+      Amplify.addPlugin(new AWSApiPlugin());
+      Amplify.addPlugin(new AWSCognitoAuthPlugin());
+      Amplify.addPlugin(new AWSS3StoragePlugin());
+      Amplify.addPlugin(new AWSPinpointAnalyticsPlugin(getApplication()));
+      Amplify.configure(getApplicationContext());
+      Log.i(TAG, "Initialized Amplify");
+    } catch (AmplifyException error) {
+      Log.e(TAG, "Could not initialize Amplify", error);
+    }
+  }
+
+  @RequiresApi(api = Build.VERSION_CODES.O)
+  void configureNotificationChannel(){
+    String CHANNEL_ID = "100";
+    NotificationChannel channel = new NotificationChannel(
+      CHANNEL_ID,
+      "Taskmaster Notifications",
+      NotificationManager.IMPORTANCE_DEFAULT);
+    channel.setDescription("new task!");
+    NotificationManager notificationManager = getSystemService(NotificationManager.class);
+    notificationManager.createNotificationChannel(channel);
   }
 }

@@ -19,7 +19,7 @@ import com.f0rgiv.taskmaster.repository.TeamRepository;
 
 import java.util.ArrayList;
 
-public class Settings extends AppCompatActivity {
+public class Settings extends AnalyticsActivity {
   static ArrayList<CloudTeam> teams = new ArrayList<>();
 
   TeamRepository teamRepository;
