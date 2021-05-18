@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.amplifyframework.core.Amplify;
 import com.f0rgiv.taskmaster.R;
 
-public class SignUpConfirmation extends AppCompatActivity {
+public class SignUpConfirmation extends AnalyticsActivity {
 String TAG = "signup";
 
   @Override

@@ -8,7 +8,7 @@ import androidx.preference.PreferenceFragmentCompat;
 
 import com.f0rgiv.taskmaster.R;
 
-public class SettingsActivity extends AppCompatActivity {
+public class SettingsActivity extends AnalyticsActivity {
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {

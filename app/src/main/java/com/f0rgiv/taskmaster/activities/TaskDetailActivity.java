@@ -15,7 +15,7 @@ import com.f0rgiv.taskmaster.R;
 import com.f0rgiv.taskmaster.repository.TaskRepository;
 import com.f0rgiv.taskmaster.service.AmplifyS3;
 
-public class TaskDetailActivity extends AppCompatActivity {
+public class TaskDetailActivity extends AnalyticsActivity {
   static String TAG = "taskDetail";
   CloudTask cloudTask;
   Handler mainThreadHandler;

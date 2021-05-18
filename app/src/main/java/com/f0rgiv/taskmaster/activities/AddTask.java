@@ -33,7 +33,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Locale;
 
-public class AddTask extends AppCompatActivity {
+public class AddTask extends AnalyticsActivity {
   static ArrayList<CloudTeam> teams = new ArrayList<>();
   static int taskCount = 0;
   String TAG = "AddTask";

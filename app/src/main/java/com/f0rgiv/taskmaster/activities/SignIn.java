@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.amplifyframework.core.Amplify;
 import com.f0rgiv.taskmaster.R;
 
-public class SignIn extends AppCompatActivity {
+public class SignIn extends AnalyticsActivity {
   String TAG = "signin";
   Handler handler;
 

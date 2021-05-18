@@ -7,7 +7,7 @@ import android.os.Bundle;
 
 import com.f0rgiv.taskmaster.R;
 
-public class AllTasks extends AppCompatActivity {
+public class AllTasks extends AnalyticsActivity {
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {

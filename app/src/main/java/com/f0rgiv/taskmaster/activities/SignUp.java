@@ -13,7 +13,7 @@ import com.amplifyframework.auth.options.AuthSignUpOptions;
 import com.amplifyframework.core.Amplify;
 import com.f0rgiv.taskmaster.R;
 
-public class SignUp extends AppCompatActivity {
+public class SignUp extends AnalyticsActivity {
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
