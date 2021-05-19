@@ -25,11 +25,13 @@ public final class CloudTask implements Model {
   public static final QueryField NAME = field("CloudTask", "name");
   public static final QueryField DESCRIPTION = field("CloudTask", "description");
   public static final QueryField STATE = field("CloudTask", "state");
+  public static final QueryField ADDRESS = field("CloudTask", "address");
   public static final QueryField TEAM = field("CloudTask", "cloudTeamId");
   private final @ModelField(targetType="ID", isRequired = true) String id;
   private final @ModelField(targetType="String") String name;
   private final @ModelField(targetType="String") String description;
   private final @ModelField(targetType="String") String state;
+  private final @ModelField(targetType="String") String address;
   private final @ModelField(targetType="CloudTeam", isRequired = true) @BelongsTo(targetName = "cloudTeamId", type = CloudTeam.class) CloudTeam team;
   public String getId() {
       return id;
@@ -47,15 +49,20 @@ public final class CloudTask implements Model {
       return state;
   }
   
+  public String getAddress() {
+      return address;
+  }
+  
   public CloudTeam getTeam() {
       return team;
   }
   
-  private CloudTask(String id, String name, String description, String state, CloudTeam team) {
+  private CloudTask(String id, String name, String description, String state, String address, CloudTeam team) {
     this.id = id;
     this.name = name;
     this.description = description;
     this.state = state;
+    this.address = address;
     this.team = team;
   }
   
@@ -71,6 +78,7 @@ public final class CloudTask implements Model {
               ObjectsCompat.equals(getName(), cloudTask.getName()) &&
               ObjectsCompat.equals(getDescription(), cloudTask.getDescription()) &&
               ObjectsCompat.equals(getState(), cloudTask.getState()) &&
+              ObjectsCompat.equals(getAddress(), cloudTask.getAddress()) &&
               ObjectsCompat.equals(getTeam(), cloudTask.getTeam());
       }
   }
@@ -82,6 +90,7 @@ public final class CloudTask implements Model {
       .append(getName())
       .append(getDescription())
       .append(getState())
+      .append(getAddress())
       .append(getTeam())
       .toString()
       .hashCode();
@@ -95,6 +104,7 @@ public final class CloudTask implements Model {
       .append("name=" + String.valueOf(getName()) + ", ")
       .append("description=" + String.valueOf(getDescription()) + ", ")
       .append("state=" + String.valueOf(getState()) + ", ")
+      .append("address=" + String.valueOf(getAddress()) + ", ")
       .append("team=" + String.valueOf(getTeam()))
       .append("}")
       .toString();
@@ -128,6 +138,7 @@ public final class CloudTask implements Model {
       null,
       null,
       null,
+      null,
       null
     );
   }
@@ -137,6 +148,7 @@ public final class CloudTask implements Model {
       name,
       description,
       state,
+      address,
       team);
   }
   public interface TeamStep {
@@ -150,6 +162,7 @@ public final class CloudTask implements Model {
     BuildStep name(String name);
     BuildStep description(String description);
     BuildStep state(String state);
+    BuildStep address(String address);
   }
   
 
@@ -159,6 +172,7 @@ public final class CloudTask implements Model {
     private String name;
     private String description;
     private String state;
+    private String address;
     @Override
      public CloudTask build() {
         String id = this.id != null ? this.id : UUID.randomUUID().toString();
@@ -168,6 +182,7 @@ public final class CloudTask implements Model {
           name,
           description,
           state,
+          address,
           team);
     }
     
@@ -196,6 +211,12 @@ public final class CloudTask implements Model {
         return this;
     }
     
+    @Override
+     public BuildStep address(String address) {
+        this.address = address;
+        return this;
+    }
+    
     /** 
      * WARNING: Do not set ID when creating a new object. Leave this blank and one will be auto generated for you.
      * This should only be set when referring to an already existing object.
@@ -219,12 +240,13 @@ public final class CloudTask implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, String name, String description, String state, CloudTeam team) {
+    private CopyOfBuilder(String id, String name, String description, String state, String address, CloudTeam team) {
       super.id(id);
       super.team(team)
         .name(name)
         .description(description)
-        .state(state);
+        .state(state)
+        .address(address);
     }
     
     @Override
@@ -245,6 +267,11 @@ public final class CloudTask implements Model {
     @Override
      public CopyOfBuilder state(String state) {
       return (CopyOfBuilder) super.state(state);
+    }
+    
+    @Override
+     public CopyOfBuilder address(String address) {
+      return (CopyOfBuilder) super.address(address);
     }
   }
   

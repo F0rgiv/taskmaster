@@ -35,6 +35,7 @@ public class TaskDetailActivity extends AnalyticsActivity {
           ((TextView) findViewById(R.id.taskDetailTitle)).setText(cloudTask.getName());
           ((TextView) findViewById(R.id.taskDetailDetail)).setText(cloudTask.getDescription());
           ((TextView) findViewById(R.id.taskDetailStatus)).setText(cloudTask.getState());
+          ((TextView) findViewById(R.id.taskDetailTextViewAddress)).setText(cloudTask.getAddress());
         }
       }
     };

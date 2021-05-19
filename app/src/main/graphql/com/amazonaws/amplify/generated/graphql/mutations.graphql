@@ -13,6 +13,7 @@ mutation CreateCloudTeam(
         name
         description
         state
+        address
         createdAt
         updatedAt
       }
@@ -36,6 +37,7 @@ mutation UpdateCloudTeam(
         name
         description
         state
+        address
         createdAt
         updatedAt
       }
@@ -59,6 +61,7 @@ mutation DeleteCloudTeam(
         name
         description
         state
+        address
         createdAt
         updatedAt
       }
@@ -78,6 +81,7 @@ mutation CreateCloudTask(
     name
     description
     state
+    address
     team {
       id
       name
@@ -101,6 +105,7 @@ mutation UpdateCloudTask(
     name
     description
     state
+    address
     team {
       id
       name
@@ -124,6 +129,7 @@ mutation DeleteCloudTask(
     name
     description
     state
+    address
     team {
       id
       name

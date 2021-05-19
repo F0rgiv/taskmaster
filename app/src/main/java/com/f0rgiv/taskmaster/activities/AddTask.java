@@ -154,7 +154,7 @@ public class AddTask extends AnalyticsActivity {
           .description(description)
           .name(title)
           .state("new")
-//          .address(address.getAddressLine(0))
+          .address(address.getAddressLine(0))
           .build();
         TaskRepository.insert(cloudTask);
         if (fileToUpload != null) {

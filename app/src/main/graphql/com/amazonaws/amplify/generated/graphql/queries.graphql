@@ -10,6 +10,7 @@ query GetCloudTeam($id: ID!) {
         name
         description
         state
+        address
         createdAt
         updatedAt
       }
@@ -44,6 +45,7 @@ query GetCloudTask($id: ID!) {
     name
     description
     state
+    address
     team {
       id
       name
@@ -69,6 +71,7 @@ query ListCloudTasks(
       name
       description
       state
+      address
       team {
         id
         name
