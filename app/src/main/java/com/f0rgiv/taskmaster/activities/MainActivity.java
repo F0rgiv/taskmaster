@@ -1,9 +1,13 @@
 package com.f0rgiv.taskmaster.activities;
 
+import android.Manifest;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -17,13 +21,11 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationManagerCompat;
+import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.amplifyframework.AmplifyException;
-import com.amplifyframework.analytics.AnalyticsEvent;
 import com.amplifyframework.analytics.pinpoint.AWSPinpointAnalyticsPlugin;
 import com.amplifyframework.api.aws.AWSApiPlugin;
 import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
@@ -33,15 +35,16 @@ import com.amplifyframework.storage.s3.AWSS3StoragePlugin;
 import com.f0rgiv.taskmaster.R;
 import com.f0rgiv.taskmaster.adapters.TaskRecyclerAdapter;
 import com.f0rgiv.taskmaster.repository.TaskRepository;
-import com.f0rgiv.taskmaster.service.AmplifyAnalytics;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
-public class MainActivity extends AnalyticsActivity{//AppCompatActivity {
+public class MainActivity extends AnalyticsActivity {//AppCompatActivity {
   public static List<CloudTask> cloudTasks = new ArrayList<>();
   static String TAG = "mainActivity";
   static String OPENED_APP_EVENT = "Application opened";
@@ -70,6 +73,7 @@ public class MainActivity extends AnalyticsActivity{//AppCompatActivity {
     setContentView(R.layout.activity_main);
 
     configureAmplify();
+    checkAndRequestPermissions();
 
     findViewById(R.id.addTaskButton).setOnClickListener(view ->
       MainActivity.this.startActivity(new Intent(MainActivity.this, AddTask.class)));
@@ -131,8 +135,19 @@ public class MainActivity extends AnalyticsActivity{//AppCompatActivity {
     }
   }
 
+
+  private void checkAndRequestPermissions() {
+    requestPermissions(new String[]{
+        Manifest.permission.ACCESS_FINE_LOCATION,
+        Manifest.permission.ACCESS_COARSE_LOCATION
+      },
+      1
+    );
+
+  }
+
   @RequiresApi(api = Build.VERSION_CODES.O)
-  void configureNotificationChannel(){
+  void configureNotificationChannel() {
     String CHANNEL_ID = "100";
     NotificationChannel channel = new NotificationChannel(
       CHANNEL_ID,
