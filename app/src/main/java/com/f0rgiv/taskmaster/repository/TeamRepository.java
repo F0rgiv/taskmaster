@@ -30,8 +30,7 @@ public class TeamRepository {
           CloudTeam.builder().name("Team1").build();
           CloudTeam.builder().name("Team2").build();
           CloudTeam.builder().name("Team3").build();
-        }
-        else tc.teamCallback(response.getData());
+        } else tc.teamCallback(response.getData());
       },
       response -> {
         //get from the local Db
@@ -47,13 +46,14 @@ public class TeamRepository {
       response -> {
         for (CloudTeam team : response.getData()) {
           Log.i(TAG, String.format("checking: %s", team.getName()));
-          if(team.getName().contentEquals(name)){
+          if (team.getName().contentEquals(name)) {
             Log.i(TAG, "findByName: found match");
             tc.teamCallback(team);
           }
         }
       },
-      response -> {}
+      response -> {
+      }
     );
   }
 
@@ -64,20 +64,11 @@ public class TeamRepository {
       ModelQuery.list(CloudTeam.class),
       response -> {
         Log.i(TAG, "findById: about to check if we need to create");
-        if (false) {
-          Log.i(TAG, "findById: none found about to create");
-          insert(CloudTeam.builder().name("Team1").build());
-          insert(CloudTeam.builder().name("Team2").build());
-          insert(CloudTeam.builder().name("Team3").build());
+        Log.i(TAG, "findById: teams already exist to create");
+        for (CloudTeam team : response.getData()) {
+          result.add(team);
         }
-        else {
-          Log.i(TAG, "findById: teams already exist to create");
-          for (CloudTeam team : response.getData()) {
-            result.add(team);
-          }
-          tc.teamsCallback(result);
-
-        }
+        tc.teamsCallback(result);
       },
       response -> {
         //save to local

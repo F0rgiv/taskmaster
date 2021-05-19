@@ -12,5 +12,6 @@ type CloudTask @model
   name: String
   description: String
   state: String
+  address: String
   team: CloudTeam! @connection(fields : ["cloudTeamId"])
 }

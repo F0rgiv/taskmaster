@@ -1,6 +1,10 @@
 package com.f0rgiv.taskmaster.activities;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -17,6 +21,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import com.amplifyframework.datastore.generated.model.CloudTask;
 import com.amplifyframework.datastore.generated.model.CloudTeam;
@@ -24,6 +29,8 @@ import com.f0rgiv.taskmaster.R;
 import com.f0rgiv.taskmaster.repository.TaskRepository;
 import com.f0rgiv.taskmaster.repository.TeamRepository;
 import com.f0rgiv.taskmaster.service.AmplifyS3;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -31,6 +38,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 public class AddTask extends AnalyticsActivity {
@@ -39,6 +47,9 @@ public class AddTask extends AnalyticsActivity {
   String TAG = "AddTask";
   Handler mainThreadHandler;
   File fileToUpload;
+  FusedLocationProviderClient fusedLocationProviderClient;
+  Geocoder geocoder;
+  Address address;
 
   @RequiresApi(api = Build.VERSION_CODES.Q)
   @Override
@@ -46,6 +57,9 @@ public class AddTask extends AnalyticsActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_add_task);
     updateTotalTasks();
+
+    loadLocationProvider();
+    getCurrentLocation();
 
     Intent intent = getIntent();
     if(intent.getType() != null && intent.getType().startsWith("image/")){
@@ -72,7 +86,7 @@ public class AddTask extends AnalyticsActivity {
             "Total tasks: %d",
             taskCount
           ));
-          Log.i(TAG, "handleMessage: updated taskcount");
+          Log.i(TAG, "handleMessage: updated taskCount");
         }
         if (msg.what == 4) {
           Spinner spinner = findViewById(R.id.addTaskTeamSpinner);
@@ -140,6 +154,7 @@ public class AddTask extends AnalyticsActivity {
           .description(description)
           .name(title)
           .state("new")
+          .address(address.getAddressLine(0))
           .build();
         TaskRepository.insert(cloudTask);
         if (fileToUpload != null) {
@@ -151,5 +166,37 @@ public class AddTask extends AnalyticsActivity {
     //update ui
     ((TextView) findViewById(R.id.submitMsgText)).setText(R.string.submittedMsg);
     updateTotalTasks();
+  }
+
+
+  private void getCurrentLocation() {
+    if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+      // TODO: Consider calling
+      //    ActivityCompat#requestPermissions
+      // here to request the missing permissions, and then overriding
+      //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+      //                                          int[] grantResults)
+      // to handle the case where the user grants the permission. See the documentation
+      // for ActivityCompat#requestPermissions for more details.
+      return;
+    }
+    fusedLocationProviderClient.getLastLocation()
+      .addOnSuccessListener(location -> {
+        Log.i(TAG, "getCurrentLocationComplete: " + location);
+        List<Address> address = null;
+        try {
+          address = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+          this.address = address.get(0);
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
+        Log.i(TAG, "getCurrentLocation: addresses" + address);
+      })
+      .addOnCompleteListener(location -> Log.i(TAG, "getCurrentLocation: " + location));
+  }
+
+  private void loadLocationProvider() {
+    fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getApplicationContext());
+    geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
   }
 }

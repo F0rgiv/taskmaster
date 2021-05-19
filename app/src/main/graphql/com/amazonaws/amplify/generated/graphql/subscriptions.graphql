@@ -10,6 +10,7 @@ subscription OnCreateCloudTeam {
         name
         description
         state
+        address
         createdAt
         updatedAt
       }
@@ -30,6 +31,7 @@ subscription OnUpdateCloudTeam {
         name
         description
         state
+        address
         createdAt
         updatedAt
       }
@@ -50,6 +52,7 @@ subscription OnDeleteCloudTeam {
         name
         description
         state
+        address
         createdAt
         updatedAt
       }
@@ -66,6 +69,7 @@ subscription OnCreateCloudTask {
     name
     description
     state
+    address
     team {
       id
       name
@@ -86,6 +90,7 @@ subscription OnUpdateCloudTask {
     name
     description
     state
+    address
     team {
       id
       name
@@ -106,6 +111,7 @@ subscription OnDeleteCloudTask {
     name
     description
     state
+    address
     team {
       id
       name
