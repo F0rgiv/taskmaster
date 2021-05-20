@@ -45,5 +45,11 @@ v1.1
 * Adds ability for users to upload a photo when creating a task and view that photo when viewing the task details.
 * Users can no receive notifications.
 
+v1.2
+* adds additional analytics data.
+  * tracks time spent on each activity throughout a session.
+
+1.3
+* adds location tracking and the ability to see the location that a device was when the task was created.
 
 ![image description](screenshots/homepage.PNG)
