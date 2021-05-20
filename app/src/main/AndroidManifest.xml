@@ -18,6 +18,9 @@
     <activity android:name=".activities.SignUpConfirmation" />
     <activity android:name=".activities.SignUp" />
 
+    <meta-data
+      android:name="com.google.android.gms.ads.APPLICATION_ID"
+      android:value="ca-app-pub-5620620814675401~4649052565"/>
 
     <service
       android:name=".service.DataBaseManagerService"
